@@ -2,12 +2,14 @@ package com.throwner.framework;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import com.throwner.engine.core.ThrownerLauncher;
 import com.throwner.ui.core.UIManager;
 import com.throwner.ui.menus.AllMenus;
 import com.throwner.ui.menus.GenericMenu;
 import com.throwner.ui.menus.MainMenu;
+import com.throwner.utils.input.InputReader;
 import com.throwner.utils.output.StringWriter;
 
 public class ContextsMap {
@@ -28,6 +30,9 @@ public class ContextsMap {
 	private static void loadUtils(){
 		StringWriter stringWriter = new StringWriter();
 		context.put(StringWriter.class, stringWriter);
+		
+		InputReader inputReader = new InputReader(new Scanner(System.in));
+		context.put(InputReader.class, inputReader);
 	}
 	
 	private static void loadCore(){
