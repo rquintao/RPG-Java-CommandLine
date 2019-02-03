@@ -10,7 +10,6 @@ public class App
 {
     public static void main( String[] args )
     {
-    	/*NEED TO INSTATIATE THIS WITHOUT NEW SOMEHOW (NO FRAMEWORKS)*/
     	ThrownerLauncher.startGame();
     }
 }

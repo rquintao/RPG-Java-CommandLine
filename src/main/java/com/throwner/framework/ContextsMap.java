@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.throwner.engine.core.ThrownerLauncher;
-import com.throwner.engine.menu.MenuManager;
 import com.throwner.ui.core.UIManager;
+import com.throwner.ui.menus.AllMenus;
+import com.throwner.ui.menus.GenericMenu;
+import com.throwner.ui.menus.MainMenu;
+import com.throwner.utils.output.StringWriter;
 
 public class ContextsMap {
 	/*USED TO CREATE BEANS TO NEVER HAVE TO INSTANTIATE CLASSES*/
@@ -13,23 +16,38 @@ public class ContextsMap {
 	@SuppressWarnings("rawtypes")
 	private static final Map<Class, Object> context = new HashMap<Class, Object>();
 	
-	public ContextsMap(){
-	    loadCore();
-	    loadUI(); 
+	static{
+		loadUtils();
+		loadCore(); 
+		loadUI();
 	}
 	
-	private void loadCore(){
+	private ContextsMap(){
+	}
+	
+	private static void loadUtils(){
+		StringWriter stringWriter = new StringWriter();
+		context.put(StringWriter.class, stringWriter);
+	}
+	
+	private static void loadCore(){
 		ThrownerLauncher thrownerLauncher = new ThrownerLauncher();
 		context.put(ThrownerLauncher.class, thrownerLauncher);
 	};
 	
-	private void loadUI(){
+	private static void loadUI(){
+		GenericMenu<Object> menuManager = new GenericMenu<Object>();
+		context.put(GenericMenu.class, menuManager);
+		
+		MainMenu mainMenu = new MainMenu();
+		context.put(MainMenu.class, mainMenu);
+		
+		AllMenus allMenus = new AllMenus();
+		context.put(AllMenus.class, allMenus);
+		
 		UIManager uiManager = new UIManager();
-		MenuManager menuManager = new MenuManager();
-		
 		context.put(UIManager.class, uiManager);
-		context.put(MenuManager.class, menuManager);
-		
+	
 	}
 	
 	@SuppressWarnings("unchecked")
