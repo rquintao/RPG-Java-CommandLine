@@ -19,4 +19,13 @@ public class InputReader {
 			return Integer.valueOf(selection);
 		} else throw new InputGenericException("Not a numeric value");
 	}
+	
+	public String getStringValue() throws InputGenericException{
+		scanner.nextLine();
+		String selection = scanner.nextLine();
+		
+		if (selection != null){
+			return selection;
+		} else throw new InputGenericException("Not a numeric value");
+	}
 }

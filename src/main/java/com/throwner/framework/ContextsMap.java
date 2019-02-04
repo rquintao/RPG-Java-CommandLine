@@ -13,6 +13,7 @@ import com.throwner.ui.menus.GenericMenu;
 import com.throwner.ui.menus.MainMenu;
 import com.throwner.utils.input.InputReader;
 import com.throwner.utils.output.StringWriter;
+import com.throwner.utils.output.WorldPrinter;
 
 public class ContextsMap {
 	/*USED TO CREATE BEANS TO NEVER HAVE TO INSTANTIATE CLASSES*/
@@ -32,6 +33,9 @@ public class ContextsMap {
 	private static void loadUtils(){
 		StringWriter stringWriter = new StringWriter(System.out);
 		context.put(StringWriter.class, stringWriter);
+		
+		WorldPrinter worldPrinter = new WorldPrinter(System.out);
+		context.put(WorldPrinter.class, worldPrinter);
 		
 		InputReader inputReader = new InputReader(new Scanner(System.in));
 		context.put(InputReader.class, inputReader);

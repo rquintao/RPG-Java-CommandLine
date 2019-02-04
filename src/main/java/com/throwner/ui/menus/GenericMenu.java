@@ -47,6 +47,13 @@ public class GenericMenu<T> {
 	    }
 	}
 	
+	public String getStringResponseFromInput() throws InputGenericException{
+
+	    String stuff = in.getStringValue();
+	    
+	    return stuff;
+	}
+	
 	protected void showMessage(String msg){
 		sw.write(msg);
 		sw.write(" ");
