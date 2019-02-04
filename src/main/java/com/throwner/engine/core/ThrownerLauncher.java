@@ -6,11 +6,12 @@ import com.throwner.ui.core.UIManager;
 public class ThrownerLauncher {
 	
 	private static UIManager uiManager = ContextsMap.getBean(UIManager.class);
-	public static boolean shutdown = false;
 	
 	public static void startGame(){
-		while(!shutdown){
-			uiManager.showMainMenu();
-		}
+		uiManager.showMainMenu();
+	}
+	
+	public static void shutdown(){
+		System.exit(0);
 	}
 }

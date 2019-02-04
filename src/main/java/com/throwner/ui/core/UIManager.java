@@ -13,6 +13,10 @@ public class UIManager {
 	public void showMainMenu(){
 		allMenus.getMainMenu().showMainMenu();
 	}
+	
+	public void showCharacterSelectionMenu(){
+		
+	}
 
 	
 

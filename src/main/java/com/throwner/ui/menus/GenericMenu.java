@@ -36,15 +36,20 @@ public class GenericMenu<T> {
 	    return enumValues;
 	}
 	
-	public T getResponseFromInput(T[] arr) throws InputGenericException{
-	    
+	public String getResponseFromInput(T[] arr) throws InputGenericException{
+
 	    int choice = in.getIntValue();
 	    
 	    if(choice <= arr.length && choice > 0){
-	    	return arr[choice - 1];
+	    	return arr[choice - 1].toString();
 	    } else {
 	    	throw new InputGenericException("Error in input");
 	    }
+	}
+	
+	protected void showMessage(String msg){
+		sw.write(msg);
+		sw.write(" ");
 	}
 
 }

@@ -2,6 +2,8 @@ package com.throwner.utils.input;
 
 import java.util.Scanner;
 
+import com.throwner.exceptions.InputGenericException;
+
 public class InputReader {
 	
 	Scanner scanner;
@@ -10,9 +12,11 @@ public class InputReader {
 		this.scanner=scanner;
 	}
 	
-	public int getIntValue(){
-		int selection = scanner.nextInt();
-		scanner.nextLine();
-		return selection;	
+	public int getIntValue() throws InputGenericException{
+		String selection = String.valueOf(scanner.next(".").charAt(0));
+		
+		if (selection.chars().allMatch( Character::isDigit )){
+			return Integer.valueOf(selection);
+		} else throw new InputGenericException("Not a numeric value");
 	}
 }

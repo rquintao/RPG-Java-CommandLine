@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.throwner.engine.core.GameEngine;
 import com.throwner.engine.core.ThrownerLauncher;
 import com.throwner.ui.core.UIManager;
 import com.throwner.ui.menus.AllMenus;
+import com.throwner.ui.menus.CharacterSelectionMenu;
 import com.throwner.ui.menus.GenericMenu;
 import com.throwner.ui.menus.MainMenu;
 import com.throwner.utils.input.InputReader;
@@ -19,16 +21,16 @@ public class ContextsMap {
 	private static final Map<Class, Object> context = new HashMap<Class, Object>();
 	
 	static{
-		loadUtils();
-		loadCore(); 
+		loadUtils(); 
 		loadUI();
+		loadCore();
 	}
 	
 	private ContextsMap(){
 	}
 	
 	private static void loadUtils(){
-		StringWriter stringWriter = new StringWriter();
+		StringWriter stringWriter = new StringWriter(System.out);
 		context.put(StringWriter.class, stringWriter);
 		
 		InputReader inputReader = new InputReader(new Scanner(System.in));
@@ -38,6 +40,7 @@ public class ContextsMap {
 	private static void loadCore(){
 		ThrownerLauncher thrownerLauncher = new ThrownerLauncher();
 		context.put(ThrownerLauncher.class, thrownerLauncher);
+
 	};
 	
 	private static void loadUI(){
@@ -46,6 +49,9 @@ public class ContextsMap {
 		
 		MainMenu mainMenu = new MainMenu();
 		context.put(MainMenu.class, mainMenu);
+		
+		CharacterSelectionMenu characterSelectionMenu = new CharacterSelectionMenu();
+		context.put(CharacterSelectionMenu.class, characterSelectionMenu);
 		
 		AllMenus allMenus = new AllMenus();
 		context.put(AllMenus.class, allMenus);
