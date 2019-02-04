@@ -1,11 +1,14 @@
 package com.throwner.engine.core;
 
+import java.util.Random;
+
 import com.throwner.engine.character.CharacterFactory;
 import com.throwner.engine.character.CharacterType;
 import com.throwner.engine.character.Charater;
 import com.throwner.engine.character.dwarf.DwarfFactory;
 import com.throwner.engine.character.paladin.PaladinFactory;
 import com.throwner.engine.character.rogue.RogueFactory;
+import com.throwner.engine.world.Tile;
 import com.throwner.engine.world.World;
 import com.throwner.framework.ContextsMap;
 import com.throwner.ui.core.UIManager;
@@ -31,12 +34,15 @@ public class GameEngine {
 		 this.setPlayer(newCharacter());
 		
 		//create world
-		this.setWorld(newWorld(5, 5));
+		this.setWorld(newWorld(20, 20));
+
+		//choose place for caracter in world
+		choosePlacePlayerInWorld();
 		
 		uiManager.printWorld(this.world);
-
-		//place caracter in world position
 		
+		//updateworld
+		updateWorld(world);
 		
 		//place monsters in world
 		
@@ -84,7 +90,20 @@ public class GameEngine {
 		return world;	
 	}
 	
-	private void placePlayerInWorld(Charater player, World world){
+	private void choosePlacePlayerInWorld(){
+		player.setPlayerXpos(new Random().nextInt(world.getHeight()-1));
+		player.setPlayerYpos(new Random().nextInt(world.getWidth()-1));
+		
+		Tile playerTile = world.getTile(player.getPlayerXpos(), player.getPlayerYpos());
+		
+		playerTile.setDiscovered(true);
+		playerTile.setOccupiedbyPlayer(true);
+		playerTile.updateTile();
+		
+	}
+
+	private void updateWorld(World world) {
+		
 		
 	}
 

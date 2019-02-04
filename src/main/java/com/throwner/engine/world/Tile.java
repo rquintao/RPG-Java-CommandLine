@@ -7,11 +7,21 @@ public class Tile {
 	private String type;
 	private boolean isOccupiedbyPlayer;
 	private boolean isDiscovered;
-	private String spriteValue = "?";
+	private String spriteValue = ".";
 	
 	public Tile(int xPos, int yPos){
 		this.xPos = xPos;
 		this.yPos = yPos;
+	}
+	
+	public void updateTile(){
+		if (isDiscovered){
+			this.spriteValue = "O";
+		}
+		
+		if (isOccupiedbyPlayer){
+			this.spriteValue = "X";
+		}
 	}
 
 	public String getType() {
