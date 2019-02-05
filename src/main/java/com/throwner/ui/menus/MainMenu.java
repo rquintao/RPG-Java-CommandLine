@@ -18,6 +18,7 @@ public class MainMenu extends GenericMenu<Object> {
 				GameEngine.startNewGame();
 				showMessage("Starting a new Game");
 			} else if(choice.equals(MainMenuTexts.LOAD.toString())){
+				GameEngine.loadPreviousGame();
 				showMessage("Loading previous game");
 			} else if(choice.equals(MainMenuTexts.ABOUT.toString())){
 				showMessage("Made by Rafael Quintão");

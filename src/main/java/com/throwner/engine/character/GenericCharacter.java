@@ -1,12 +1,18 @@
 package com.throwner.engine.character;
 
-public class GenericCharacter {
+import java.io.Serializable;
+
+public class GenericCharacter implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -379077880585672617L;
 	private CharacterType characterType;
 	private String name;
 	private int charXpos;
 	private int charYpos;
 	
-	public GenericCharacter(CharacterType characterType){
+	public GenericCharacter(CharacterType characterType) {
 		setCharacterType(characterType);
 	}
 

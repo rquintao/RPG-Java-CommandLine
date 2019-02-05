@@ -17,6 +17,8 @@ import com.throwner.engine.world.World;
 import com.throwner.framework.ContextsMap;
 import com.throwner.ui.core.UIManager;
 import com.throwner.ui.items.CharactersTexts;
+import com.throwner.utils.input.InputUtils;
+import com.throwner.utils.output.OutputUtils;
 
 public class GameEngine {
 	
@@ -26,6 +28,8 @@ public class GameEngine {
 	private List<MonsterCharacter> monsters;
 	private CharacterFactory charFactory;
 	private Random RANDOM = ContextsMap.getBean(Random.class);
+	private OutputUtils sw = ContextsMap.getBean(OutputUtils.class);
+	private InputUtils in = ContextsMap.getBean(InputUtils.class);
 	
 	//MAKE THIS EDITABLE WITH DIFICULTY MAYBE?
 	private double monsterOcurrence = 0.15;
@@ -34,6 +38,11 @@ public class GameEngine {
 		GameEngine gameEngine = new GameEngine();
 		gameEngine.newGame();
 	};
+	
+	public static void loadPreviousGame() {
+		GameEngine gameEngine = new GameEngine();
+		gameEngine.loadGame();
+	}
 	
 	public void newGame(){
 		//choose class OK
@@ -48,24 +57,33 @@ public class GameEngine {
 		//choose place for caracter in world OK
 		choosePlacePlayerInWorld();
 		
-		//create monsters
-		this.setMonsters(newMonsters());
-		
 		//place monsters in world
-		uiManager.printWorld(this.world);
+		//create monsters
+		this.setMonsters(newMonsters());		
 		
-		int aux = 2;
+		//uiManager.printWorld(this.world);
+		
 		//create Game class
+		Game game = new Game(player, world, monsters);
+		
+		saveGame(game);
+		runGame(game);
+		
 	}
 	
 	
 
-	public void runGame(/*Game class*/){
+	public void runGame(Game game){
 		//RUN THE GAME
 	}
 	
-	public void loadGame(/*Game class*/){
-		
+	public void loadGame(){
+		Game game = in.loadState();
+		runGame(game);
+	}
+	
+	public void saveGame(Game game){
+		sw.saveState(game);
 	}
 	
 	private List<MonsterCharacter> newMonsters() {
@@ -157,11 +175,6 @@ public class GameEngine {
 		
 	}
 
-	private void updateWorld(World world) {
-		
-		
-	}
-
 	public Charater getPlayer() {
 		return player;
 	}
@@ -185,5 +198,7 @@ public class GameEngine {
 	public void setMonsters(List<MonsterCharacter> monsters) {
 		this.monsters = monsters;
 	}
+
+
 	
 }

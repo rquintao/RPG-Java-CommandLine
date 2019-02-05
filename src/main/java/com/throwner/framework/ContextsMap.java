@@ -12,8 +12,8 @@ import com.throwner.ui.menus.AllMenus;
 import com.throwner.ui.menus.CharacterSelectionMenu;
 import com.throwner.ui.menus.GenericMenu;
 import com.throwner.ui.menus.MainMenu;
-import com.throwner.utils.input.InputReader;
-import com.throwner.utils.output.StringWriter;
+import com.throwner.utils.input.InputUtils;
+import com.throwner.utils.output.OutputUtils;
 import com.throwner.utils.output.WorldPrinter;
 
 public class ContextsMap {
@@ -32,14 +32,14 @@ public class ContextsMap {
 	}
 	
 	private static void loadUtils(){
-		StringWriter stringWriter = new StringWriter(System.out);
-		context.put(StringWriter.class, stringWriter);
+		OutputUtils stringWriter = new OutputUtils(System.out);
+		context.put(OutputUtils.class, stringWriter);
 		
 		WorldPrinter worldPrinter = new WorldPrinter(System.out);
 		context.put(WorldPrinter.class, worldPrinter);
 		
-		InputReader inputReader = new InputReader(new Scanner(System.in));
-		context.put(InputReader.class, inputReader);
+		InputUtils inputReader = new InputUtils(new Scanner(System.in));
+		context.put(InputUtils.class, inputReader);
 		
 		Random RANDOM = new Random();
 		context.put(Random.class, RANDOM);

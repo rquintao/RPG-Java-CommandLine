@@ -1,11 +1,16 @@
 package com.throwner.engine.world;
 
-import com.throwner.engine.character.Charater;
+import java.io.Serializable;
+
 import com.throwner.engine.character.MonsterCharacter;
 import com.throwner.engine.character.playerfactory.PlayerCharacter;
 
-public class Tile {
+public class Tile implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5957655655471518008L;
 	@SuppressWarnings("unused")
 	private final int xPos, yPos;
 	private String type;

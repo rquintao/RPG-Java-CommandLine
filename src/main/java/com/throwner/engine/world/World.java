@@ -1,9 +1,14 @@
 package com.throwner.engine.world;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class World {
+public class World implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6830300702630322833L;
 	Tile[][] worldMap;
 	List<Tile> tiles = new ArrayList<>();
 	private int width;

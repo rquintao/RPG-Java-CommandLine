@@ -5,17 +5,17 @@ import java.util.List;
 
 import com.throwner.exceptions.InputGenericException;
 import com.throwner.framework.ContextsMap;
-import com.throwner.utils.input.InputReader;
-import com.throwner.utils.output.StringWriter;
+import com.throwner.utils.input.InputUtils;
+import com.throwner.utils.output.OutputUtils;
 
 public class GenericMenu<T> {
 	
-	StringWriter sw;
-	InputReader in;
+	OutputUtils sw;
+	InputUtils in;
 	
 	public GenericMenu(){
-		sw = ContextsMap.getBean(StringWriter.class);
-		in = ContextsMap.getBean(InputReader.class);
+		sw = ContextsMap.getBean(OutputUtils.class);
+		in = ContextsMap.getBean(InputUtils.class);
 	}
 
 	

@@ -1,6 +1,12 @@
 package com.throwner.engine.character.stats;
 
-public class GenericStats {
+import java.io.Serializable;
+
+public class GenericStats implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5919475786657193062L;
 	private int health;
 	private int strenght;
 	private int agility;
