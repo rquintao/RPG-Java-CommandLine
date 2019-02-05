@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.throwner.engine.core.GameEngine;
 import com.throwner.engine.core.ThrownerLauncher;
 import com.throwner.ui.core.UIManager;
 import com.throwner.ui.menus.AllMenus;
 import com.throwner.ui.menus.CharacterSelectionMenu;
 import com.throwner.ui.menus.GenericMenu;
 import com.throwner.ui.menus.MainMenu;
+import com.throwner.ui.menus.WorldInputsMenu;
 import com.throwner.utils.input.InputUtils;
 import com.throwner.utils.output.OutputUtils;
 import com.throwner.utils.output.WorldPrinter;
@@ -60,6 +60,9 @@ public class ContextsMap {
 		
 		CharacterSelectionMenu characterSelectionMenu = new CharacterSelectionMenu();
 		context.put(CharacterSelectionMenu.class, characterSelectionMenu);
+		
+		WorldInputsMenu worldInputsMenu = new WorldInputsMenu();
+		context.put(WorldInputsMenu.class, worldInputsMenu);
 		
 		AllMenus allMenus = new AllMenus();
 		context.put(AllMenus.class, allMenus);

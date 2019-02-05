@@ -15,11 +15,11 @@ public class MainMenu extends GenericMenu<Object> {
 			String choice = getResponseFromInput(MainMenuTexts.values());
 			 
 			if(choice.equals(MainMenuTexts.START.toString())){
-				GameEngine.startNewGame();
 				showMessage("Starting a new Game");
+				GameEngine.startNewGame();
 			} else if(choice.equals(MainMenuTexts.LOAD.toString())){
-				GameEngine.loadPreviousGame();
 				showMessage("Loading previous game");
+				GameEngine.loadPreviousGame();
 			} else if(choice.equals(MainMenuTexts.ABOUT.toString())){
 				showMessage("Made by Rafael Quintão");
 			} else if(choice.equals(MainMenuTexts.EXIT.toString())){

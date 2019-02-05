@@ -33,6 +33,8 @@ public class GameEngine {
 	
 	//MAKE THIS EDITABLE WITH DIFICULTY MAYBE?
 	private double monsterOcurrence = 0.15;
+	private boolean victory = false;
+	private boolean defeat = false;
 
 	public static void startNewGame() {
 		GameEngine gameEngine = new GameEngine();
@@ -61,20 +63,12 @@ public class GameEngine {
 		//create monsters
 		this.setMonsters(newMonsters());		
 		
-		//uiManager.printWorld(this.world);
-		
 		//create Game class
 		Game game = new Game(player, world, monsters);
 		
 		saveGame(game);
 		runGame(game);
 		
-	}
-	
-	
-
-	public void runGame(Game game){
-		//RUN THE GAME
 	}
 	
 	public void loadGame(){
@@ -197,6 +191,33 @@ public class GameEngine {
 
 	public void setMonsters(List<MonsterCharacter> monsters) {
 		this.monsters = monsters;
+	}
+	
+	
+
+	public void runGame(Game game){
+		
+		
+		while(!victory || !defeat){
+			//PRINT WORLD
+			uiManager.printWorld(game.getWorld());
+			//WAIT FOR USER INPUT
+			uiManager.showWorldInputs();
+			
+			//TAKE ACTION
+			
+			//UPDATE WORLD
+			
+			//FIGHT?
+				//UPDATE WORLD
+				//UPDATE PLAYER
+				//UPDATE MONSTERS
+			
+			//VICTORY OR DEFEAT?
+			
+		}
+		
+		
 	}
 
 
