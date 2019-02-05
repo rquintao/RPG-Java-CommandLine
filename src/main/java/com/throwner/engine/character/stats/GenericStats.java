@@ -1,11 +1,15 @@
-package com.throwner.engine.character;
+package com.throwner.engine.character.stats;
 
-public class CharacterStats {
+public class GenericStats {
 	private int health;
 	private int strenght;
 	private int agility;
-	private int xp = 0;
-	private int level = 1;
+	
+	public GenericStats(int health, int strength, int agility){
+		setHealth(health);
+		setStrenght(strength);
+		setAgility(agility);
+	}
 	
 	public int getHealth() {
 		return health;
@@ -25,19 +29,4 @@ public class CharacterStats {
 	public void setAgility(int agility) {
 		this.agility = agility;
 	}
-	public int getXp() {
-		return xp;
-	}
-	public void setXp(int xp) {
-		this.xp = xp;
-	}
-	public int getLevel() {
-		return level;
-	}
-	public void setLevel(int level) {
-		this.level = level;
-	}
-	
-	
-	
 }

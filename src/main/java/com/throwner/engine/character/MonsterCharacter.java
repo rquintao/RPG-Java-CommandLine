@@ -1,23 +1,22 @@
 package com.throwner.engine.character;
 
 import com.throwner.engine.character.stats.CharacterStats;
+import com.throwner.engine.character.stats.GenericStats;
 
-public abstract class Charater extends GenericCharacter {
+public class MonsterCharacter extends GenericCharacter {
 	
-	private CharacterStats charStats;
-
-	public abstract CharacterType getCharacterType();
+	private GenericStats charStats;
 	
-	public Charater(CharacterType characterType){
+	public MonsterCharacter(CharacterType characterType){
 		super(characterType);
 		this.charStats = new CharacterStats(characterType.getStrenght(), characterType.getHealth(), characterType.getAgility());
 	}
 
-	public CharacterStats getCharStats() {
+	public GenericStats getCharStats() {
 		return charStats;
 	}
 
-	public void setCharStats(CharacterStats charStats) {
+	public void setCharStats(GenericStats charStats) {
 		this.charStats = charStats;
 	}
 

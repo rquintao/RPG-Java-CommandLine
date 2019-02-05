@@ -1,10 +1,19 @@
 package com.throwner.engine.world;
 
+import com.throwner.engine.character.Charater;
+import com.throwner.engine.character.MonsterCharacter;
+import com.throwner.engine.character.playerfactory.PlayerCharacter;
+
 public class Tile {
 	
 	@SuppressWarnings("unused")
 	private final int xPos, yPos;
 	private String type;
+	
+	private PlayerCharacter player;
+	private MonsterCharacter monster;
+	
+	private boolean isOccupiedbyMonster;
 	private boolean isOccupiedbyPlayer;
 	private boolean isDiscovered;
 	private String spriteValue = ".";
@@ -15,6 +24,16 @@ public class Tile {
 	}
 	
 	public void updateTile(){
+		if(this.monster!=null){
+			this.isOccupiedbyMonster = true;
+		}else this.isOccupiedbyMonster = false;
+		
+		
+		if(this.player!=null){
+			this.isOccupiedbyPlayer=true;
+			this.isDiscovered=true;
+		} else this.isOccupiedbyPlayer = false;
+		
 		if (isDiscovered){
 			this.spriteValue = "O";
 		}
@@ -22,6 +41,15 @@ public class Tile {
 		if (isOccupiedbyPlayer){
 			this.spriteValue = "X";
 		}
+		
+		if (isOccupiedbyMonster){
+			this.spriteValue = "M";
+		}
+		
+		if(isOccupiedbyPlayer && isOccupiedbyMonster){
+			this.spriteValue = "F";
+		}
+		
 	}
 
 	public String getType() {
@@ -54,5 +82,29 @@ public class Tile {
 
 	public void setOccupiedbyPlayer(boolean isOccupiedbyPlayer) {
 		this.isOccupiedbyPlayer = isOccupiedbyPlayer;
+	}
+
+	public PlayerCharacter getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(PlayerCharacter player) {
+		this.player = player;
+	}
+
+	public MonsterCharacter getMonster() {
+		return monster;
+	}
+
+	public void setMonster(MonsterCharacter monster) {
+		this.monster = monster;
+	}
+
+	public boolean isOccupiedbyMonster() {
+		return isOccupiedbyMonster;
+	}
+
+	public void setOccupiedbyMonster(boolean isOccupiedbyMonster) {
+		this.isOccupiedbyMonster = isOccupiedbyMonster;
 	}
 }

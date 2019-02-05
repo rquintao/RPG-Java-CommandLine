@@ -2,6 +2,7 @@ package com.throwner.framework;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 import com.throwner.engine.core.GameEngine;
@@ -39,6 +40,9 @@ public class ContextsMap {
 		
 		InputReader inputReader = new InputReader(new Scanner(System.in));
 		context.put(InputReader.class, inputReader);
+		
+		Random RANDOM = new Random();
+		context.put(Random.class, RANDOM);
 	}
 	
 	private static void loadCore(){

@@ -1,25 +1,34 @@
 package com.throwner.engine.core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import com.throwner.engine.character.CharacterFactory;
 import com.throwner.engine.character.CharacterType;
 import com.throwner.engine.character.Charater;
-import com.throwner.engine.character.dwarf.DwarfFactory;
-import com.throwner.engine.character.paladin.PaladinFactory;
-import com.throwner.engine.character.rogue.RogueFactory;
+import com.throwner.engine.character.MonsterCharacter;
+import com.throwner.engine.character.monsterfactory.MonsterFactory;
+import com.throwner.engine.character.playerfactory.PlayerCharacter;
+import com.throwner.engine.character.playerfactory.PlayerFactory;
 import com.throwner.engine.world.Tile;
 import com.throwner.engine.world.World;
 import com.throwner.framework.ContextsMap;
 import com.throwner.ui.core.UIManager;
 import com.throwner.ui.items.CharactersTexts;
-import com.throwner.ui.menus.AllMenus;
 
 public class GameEngine {
 	
 	private UIManager uiManager = ContextsMap.getBean(UIManager.class);
-	private Charater player;
+	private PlayerCharacter player;
 	private World world;
+	private List<MonsterCharacter> monsters;
+	private CharacterFactory charFactory;
+	private Random RANDOM = ContextsMap.getBean(Random.class);
+	
+	//MAKE THIS EDITABLE WITH DIFICULTY MAYBE?
+	private double monsterOcurrence = 0.15;
 
 	public static void startNewGame() {
 		GameEngine gameEngine = new GameEngine();
@@ -31,24 +40,26 @@ public class GameEngine {
 		//choose name OK
 		//choose skill points NOK
 		//create caracter OK
-		 this.setPlayer(newCharacter());
+		 this.setPlayer((PlayerCharacter) newCharacter());
 		
-		//create world
+		//create world OK
 		this.setWorld(newWorld(20, 20));
 
-		//choose place for caracter in world
+		//choose place for caracter in world OK
 		choosePlacePlayerInWorld();
 		
-		uiManager.printWorld(this.world);
-		
-		//updateworld
-		updateWorld(world);
+		//create monsters
+		this.setMonsters(newMonsters());
 		
 		//place monsters in world
+		uiManager.printWorld(this.world);
 		
+		int aux = 2;
 		//create Game class
 	}
 	
+	
+
 	public void runGame(/*Game class*/){
 		//RUN THE GAME
 	}
@@ -57,24 +68,70 @@ public class GameEngine {
 		
 	}
 	
+	private List<MonsterCharacter> newMonsters() {
+		List<MonsterCharacter> arr = new ArrayList<MonsterCharacter>();
+		charFactory = new MonsterFactory();
+		
+		int numberOfMonsters = (int)(world.getTiles().size() * monsterOcurrence);
+		int sizeOfEnum = CharacterType.values().length;
+		
+		
+		for(int i=0; i<numberOfMonsters; i++){
+			CharacterType monsterPicked;
+			do{
+				monsterPicked = CharacterType.values()[RANDOM.nextInt(sizeOfEnum-1)];
+			} while(!monsterPicked.toString().equals("monster"));
+			
+			MonsterCharacter newMonster = (MonsterCharacter) charFactory.createCharacter(CharacterType.MONSTER_1);
+			arr.add(newMonster);
+		}
+		
+		//place them in world
+		int[][] posArray = new int[this.world.getHeight()][this.world.getWidth()];
+		Arrays.fill(posArray[0], 0);  //WORKS!?
+		
+		//block player position who is already defined
+		posArray[this.player.getCharXpos()][this.player.getCharYpos()] = 1;
+		
+		for(MonsterCharacter monster: arr){
+			int xPos = 0;
+			int yPos = 0;
+			
+			do{
+				xPos = RANDOM.nextInt(world.getHeight()-1);
+				yPos = RANDOM.nextInt(world.getWidth()-1);
+			}
+			while(posArray[xPos][yPos]!=0);
+			
+			monster.setCharXpos(xPos);
+			monster.setCharYpos(yPos);
+			
+			world.getTile(xPos, yPos).setMonster(monster);
+			world.getTile(xPos, yPos).updateTile();
+			posArray[xPos][yPos] = 1;
+			
+		}
+		
+		return arr;
+	}
+	
 	private Charater newCharacter(){
 		
 		Charater player = null;
-		CharacterFactory factory;
 		CharactersTexts choice  = uiManager.showCharacterSelectionMenu();
 		
 		switch(choice){
 		case PALADIN:
-			factory = new PaladinFactory();
-		    player = factory.createCharacter(CharacterType.PALADIN);
+			charFactory = new PlayerFactory();
+		    player = (Charater) charFactory.createCharacter(CharacterType.PALADIN);
 			break;
 		case DWARF:
-			factory = new DwarfFactory();
-		    player = factory.createCharacter(CharacterType.DWARF);
+			charFactory = new PlayerFactory();
+		    player = (Charater) charFactory.createCharacter(CharacterType.DWARF);
 			break;
 		case ROGUE:
-			factory = new RogueFactory();
-		    player = factory.createCharacter(CharacterType.ROGUE);
+			charFactory = new PlayerFactory();
+		    player = (Charater) charFactory.createCharacter(CharacterType.ROGUE);
 			break;
 		}
 		
@@ -91,13 +148,11 @@ public class GameEngine {
 	}
 	
 	private void choosePlacePlayerInWorld(){
-		player.setPlayerXpos(new Random().nextInt(world.getHeight()-1));
-		player.setPlayerYpos(new Random().nextInt(world.getWidth()-1));
+		player.setCharXpos(RANDOM.nextInt(world.getHeight()-1));
+		player.setCharYpos(RANDOM.nextInt(world.getWidth()-1));
 		
-		Tile playerTile = world.getTile(player.getPlayerXpos(), player.getPlayerYpos());
-		
-		playerTile.setDiscovered(true);
-		playerTile.setOccupiedbyPlayer(true);
+		Tile playerTile = world.getTile(player.getCharXpos(), player.getCharYpos());
+		playerTile.setPlayer(player);
 		playerTile.updateTile();
 		
 	}
@@ -111,7 +166,7 @@ public class GameEngine {
 		return player;
 	}
 
-	public void setPlayer(Charater player) {
+	public void setPlayer(PlayerCharacter player) {
 		this.player = player;
 	}
 
@@ -121,6 +176,14 @@ public class GameEngine {
 
 	public void setWorld(World world) {
 		this.world = world;
+	}
+
+	public List<MonsterCharacter> getMonsters() {
+		return monsters;
+	}
+
+	public void setMonsters(List<MonsterCharacter> monsters) {
+		this.monsters = monsters;
 	}
 	
 }
