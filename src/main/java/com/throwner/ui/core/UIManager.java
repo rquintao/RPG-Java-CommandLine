@@ -1,5 +1,7 @@
 package com.throwner.ui.core;
 
+import com.throwner.engine.character.MonsterCharacter;
+import com.throwner.engine.character.playerfactory.PlayerCharacter;
 import com.throwner.engine.world.World;
 import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.framework.ContextsMap;
@@ -51,6 +53,11 @@ public class UIManager {
 
 	public FightMenuTexts showFightMenu() throws InputNotInOptionsException {
 		return allMenus.getFightMenu().showFightMenu();
+	}
+
+	public void showFightStatus(MonsterCharacter monster, PlayerCharacter player) {
+		worldPrinter.printFight(monster, player);
+		
 	}
 
 	

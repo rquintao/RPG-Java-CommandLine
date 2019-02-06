@@ -2,6 +2,8 @@ package com.throwner.utils.output;
 
 import java.io.PrintStream;
 
+import com.throwner.engine.character.MonsterCharacter;
+import com.throwner.engine.character.playerfactory.PlayerCharacter;
 import com.throwner.engine.world.World;
 
 public class WorldPrinter {
@@ -31,6 +33,14 @@ public class WorldPrinter {
 			out.println(toPrint);
 		}
 		
+	}
+
+	public void printFight(MonsterCharacter monster, PlayerCharacter player) {
+		out.println("LVL:		Monster:-  |  " + player.getName() + ": " + player.getCharStats().getLevel());
+		out.println("XP:		Monster:-  |  " + player.getName() + ": " + player.getCharStats().getXp());
+		out.println("Strength:	Monster:"+monster.getCharStats().getStrenght()+"  |  " + player.getName() + ": " + player.getCharStats().getStrenght());
+		out.println("Agility:	Monster:"+monster.getCharStats().getAgility()+"  |  " + player.getName() + ": " + player.getCharStats().getAgility());
+		out.println("Health:		Monster:"+monster.getCharStats().getHealth()+"  |  " + player.getName() + ": " + player.getCharStats().getHealth());
 	}
 	
 }
