@@ -3,7 +3,11 @@ package com.throwner.ui.items;
 public enum WorldInputsTexts {
 	UP("W - Move up"),
 	DOWN("S - Move down"),
-	LEFT("A - Move left");
+	LEFT("A - Move left"),
+	RIGHT("D - Move right"),
+	OPTIONS("M - Menu"),
+	FIGHT("F - Fight"),
+	RUN("R - Try to Run");
 	
 	private final String desc;
 	
@@ -16,5 +20,4 @@ public enum WorldInputsTexts {
     public String toString() {
           return desc;
     }
-
 }

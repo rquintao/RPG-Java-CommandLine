@@ -39,17 +39,19 @@ public class Tile implements Serializable {
 			this.isDiscovered=true;
 		} else this.isOccupiedbyPlayer = false;
 		
+		
 		if (isDiscovered){
 			this.spriteValue = "O";
 		}
+		
+		if (isOccupiedbyMonster && isDiscovered){
+			this.spriteValue = "M";
+		};
 		
 		if (isOccupiedbyPlayer){
 			this.spriteValue = "X";
 		}
 		
-		if (isOccupiedbyMonster){
-			this.spriteValue = "M";
-		}
 		
 		if(isOccupiedbyPlayer && isOccupiedbyMonster){
 			this.spriteValue = "F";

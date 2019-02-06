@@ -11,9 +11,11 @@ public class GenericCharacter implements Serializable {
 	private String name;
 	private int charXpos;
 	private int charYpos;
+	private CharacterStatus status;
 	
 	public GenericCharacter(CharacterType characterType) {
 		setCharacterType(characterType);
+		setStatus(CharacterStatus.ALIVE);
 	}
 
 	public CharacterType getCharacterType() {
@@ -46,5 +48,13 @@ public class GenericCharacter implements Serializable {
 
 	public void setCharYpos(int charYpos) {
 		this.charYpos = charYpos;
+	}
+
+	public CharacterStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(CharacterStatus status) {
+		this.status = status;
 	}
 }

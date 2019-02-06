@@ -32,6 +32,15 @@ public class InputUtils {
 		} else throw new InputGenericException("Not a numeric value");
 	}
 	
+	public char getCharValue() throws InputGenericException{
+		scanner.nextLine();
+		char ch = scanner.findInLine(".").charAt(0);
+		
+		if (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n')
+			throw new InputGenericException("Not a numeric value");
+		return Character.toUpperCase(ch);
+	}
+	
 	public Game loadState(){
 		try
 		{

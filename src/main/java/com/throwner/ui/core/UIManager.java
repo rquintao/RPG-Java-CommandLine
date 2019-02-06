@@ -3,8 +3,9 @@ package com.throwner.ui.core;
 import com.throwner.engine.world.World;
 import com.throwner.framework.ContextsMap;
 import com.throwner.ui.items.CharactersTexts;
+import com.throwner.ui.items.WorldInputsTexts;
 import com.throwner.ui.menus.AllMenus;
-import com.throwner.ui.menus.WorldInputsMenu;
+import com.throwner.utils.output.OutputUtils;
 import com.throwner.utils.output.WorldPrinter;
 
 public class UIManager {
@@ -32,9 +33,13 @@ public class UIManager {
 		worldPrinter.printWorld(worldMap);
 	}
 
-	public WorldInputsMenu showWorldInputs() {
-		return allMenus.getWorldInputsMenu();
+	public WorldInputsTexts showWorldInputs() {
+		return allMenus.getWorldInputsMenu().showWorldInputsMenu();
 		
+	}
+	
+	public void showMessage(String msg){
+		allMenus.getGenericMenu().showMessage(msg);
 	}
 
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.throwner.exceptions.InputGenericException;
+import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.framework.ContextsMap;
 import com.throwner.utils.input.InputUtils;
 import com.throwner.utils.output.OutputUtils;
@@ -47,6 +48,30 @@ public class GenericMenu<T> {
 	    }
 	}
 	
+	public char getCharResponseFromInput(T[] arr) throws InputNotInOptionsException, InputGenericException{
+
+	    char choice = in.getCharValue();
+	    
+	    List<String> options = new ArrayList<String>();
+	    
+	    for(T var: arr){
+	    	String aux = String.valueOf(var.toString().charAt(0));
+	    	options.add(aux);
+	    }
+	    
+	    String charac= String.valueOf(choice);
+	    
+	    if(options.contains(charac)){
+	    	int i = options.indexOf(charac);
+	    	return options.get(i).charAt(0);
+	    } else {
+	    	throw new InputNotInOptionsException("Not in options");
+	    }
+	    
+	    
+	}
+	
+	
 	public String getStringResponseFromInput() throws InputGenericException{
 
 	    String stuff = in.getStringValue();
@@ -54,7 +79,7 @@ public class GenericMenu<T> {
 	    return stuff;
 	}
 	
-	protected void showMessage(String msg){
+	public void showMessage(String msg){
 		sw.write(msg);
 		sw.write(" ");
 	}
