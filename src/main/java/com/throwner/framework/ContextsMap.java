@@ -6,9 +6,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 import com.throwner.engine.core.ThrownerLauncher;
+import com.throwner.engine.core.fight.FightManager;
 import com.throwner.ui.core.UIManager;
 import com.throwner.ui.menus.AllMenus;
 import com.throwner.ui.menus.CharacterSelectionMenu;
+import com.throwner.ui.menus.FightMenu;
 import com.throwner.ui.menus.GenericMenu;
 import com.throwner.ui.menus.MainMenu;
 import com.throwner.ui.menus.WorldInputsMenu;
@@ -47,6 +49,9 @@ public class ContextsMap {
 	}
 	
 	private static void loadCore(){
+		FightManager fightManager = new FightManager();
+		context.put(FightManager.class, fightManager);
+		
 		ThrownerLauncher thrownerLauncher = new ThrownerLauncher();
 		context.put(ThrownerLauncher.class, thrownerLauncher);
 
@@ -67,6 +72,9 @@ public class ContextsMap {
 		
 		WorldInputsSubMenu worldInputsSubMenu = new WorldInputsSubMenu();
 		context.put(WorldInputsSubMenu.class, worldInputsSubMenu);
+		
+		FightMenu fightMenu = new FightMenu();
+		context.put(FightMenu.class, fightMenu);
 		
 		AllMenus allMenus = new AllMenus();
 		context.put(AllMenus.class, allMenus);

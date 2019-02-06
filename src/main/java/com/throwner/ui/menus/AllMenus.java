@@ -7,6 +7,8 @@ public class AllMenus {
 	private CharacterSelectionMenu characterSelectionMenu = ContextsMap.getBean(CharacterSelectionMenu.class);
 	private WorldInputsMenu worldInputsMenu = ContextsMap.getBean(WorldInputsMenu.class); 
 	private WorldInputsSubMenu worldInputsSubMenu = ContextsMap.getBean(WorldInputsSubMenu.class); 
+	private FightMenu fightMenu = ContextsMap.getBean(FightMenu.class); 
+	
 	@SuppressWarnings("unchecked")
 	private GenericMenu<Object> genericMenu = ContextsMap.getBean(GenericMenu.class); 
 	
@@ -28,6 +30,10 @@ public class AllMenus {
 
 	public WorldInputsSubMenu getWorldInputsSubMenu() {
 		return worldInputsSubMenu;
+	}
+	
+	public FightMenu getFightMenu(){
+		return fightMenu;
 	}
 	
 }

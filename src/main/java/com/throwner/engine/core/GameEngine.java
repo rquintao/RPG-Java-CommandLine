@@ -13,6 +13,7 @@ import com.throwner.engine.character.MonsterCharacter;
 import com.throwner.engine.character.monsterfactory.MonsterFactory;
 import com.throwner.engine.character.playerfactory.PlayerCharacter;
 import com.throwner.engine.character.playerfactory.PlayerFactory;
+import com.throwner.engine.core.fight.FightManager;
 import com.throwner.engine.world.Tile;
 import com.throwner.engine.world.World;
 import com.throwner.exceptions.InputNotInOptionsException;
@@ -21,7 +22,6 @@ import com.throwner.ui.core.UIManager;
 import com.throwner.ui.items.CharactersTexts;
 import com.throwner.ui.items.WorldInputsSubTexts;
 import com.throwner.ui.items.WorldInputsTexts;
-import com.throwner.ui.menus.WorldInputsSubMenu;
 import com.throwner.utils.input.InputUtils;
 import com.throwner.utils.output.OutputUtils;
 
@@ -35,6 +35,7 @@ public class GameEngine {
 	private Random RANDOM = ContextsMap.getBean(Random.class);
 	private OutputUtils sw = ContextsMap.getBean(OutputUtils.class);
 	private InputUtils in = ContextsMap.getBean(InputUtils.class);
+	private FightManager fightManager = ContextsMap.getBean(FightManager.class);
 	
 	//MAKE THIS EDITABLE WITH DIFICULTY MAYBE?
 	private double monsterOcurrence = 0.15;
@@ -210,20 +211,14 @@ public class GameEngine {
 			WorldInputsTexts choice;
 			try {
 				choice = uiManager.showWorldInputs();
-			
-			
+
 			//TAKE ACTION
+				//FIGHT?
 			takeAction(choice, game);
 			
 			//UPDATE WORLD
 			updateWorld(game);
-			
-			
-			//FIGHT?
-				//UPDATE WORLD
-				//UPDATE PLAYER
-				//UPDATE MONSTERS
-			
+
 			//VICTORY OR DEFEAT?
 			
 			} catch (InputNotInOptionsException e) {
@@ -247,13 +242,13 @@ public class GameEngine {
 	private void takeAction(WorldInputsTexts choice, Game game) throws InputNotInOptionsException {
 
 		switch(choice){
-		case UP: playerMove(-1, 0, game);
+		case UP: playerMove(-1, 0, game, 'W');
 				break;
-		case DOWN: playerMove(1, 0, game);
+		case DOWN: playerMove(1, 0, game, 'W');
 				break;	
-		case LEFT: playerMove(0, -1, game);
+		case LEFT: playerMove(0, -1, game, 'W');
 				break;
-		case RIGHT: playerMove(0, 1, game);
+		case RIGHT: playerMove(0, 1, game,'W');
 				break;
 		case OPTIONS: 
 				WorldInputsSubTexts subChoice = uiManager.showWorldSubInputs();
@@ -270,14 +265,20 @@ public class GameEngine {
 		case FIGHT://New fight
 					if(fightValidation(game)){
 						//FIGHTCLUB
-						//fight manager(new screen) absolute madness
+						PlayerCharacter fightplayer = game.getPlayer();
+						MonsterCharacter fightmonster = game.getWorld().getTile(game.getPlayer().getCharXpos(), game.getPlayer().getCharYpos()).getMonster();
+						fightManager.startFight(fightmonster, fightplayer);
 					}
 			break;
-		case RUN://SOME AMAZING AGILITY CHECKING OBVIOUSLY MISSING LOGIC 
-				//IF WINS
+		case RUN:
 				if(runValidation(game)){
-					playerMove(RANDOM.nextInt(3)-1, RANDOM.nextInt(3)-1, game);
-				}
+					playerMove(RANDOM.nextInt(3)-1, RANDOM.nextInt(3)-1, game, 'R');
+					break;
+				}else {//FIGHT CLUB ONCE AGAIN;
+					PlayerCharacter fightplayer = game.getPlayer();
+					MonsterCharacter fightmonster = game.getWorld().getTile(game.getPlayer().getCharXpos(), game.getPlayer().getCharYpos()).getMonster();
+					fightManager.startFight(fightmonster, fightplayer);
+				};
 				break;
 		}
 		
@@ -285,7 +286,7 @@ public class GameEngine {
 
 
 
-	private void playerMove(int i, int j, Game game) {
+	private void playerMove(int i, int j, Game game, char flgMovementType) {
 		PlayerCharacter gamePlayer = game.getPlayer();
 		int xPos = gamePlayer.getCharXpos();
 		int yPos = gamePlayer.getCharYpos();
@@ -293,6 +294,13 @@ public class GameEngine {
 		//check if is a valid move
 		if(xPos + i < 0 || yPos + j < 0 || xPos+i > game.getWorld().getHeight() || yPos+i > game.getWorld().getWidth()){
 			//OUT OF BOUNDS
+		}
+		
+		MonsterCharacter monster = game.getWorld().getTile(xPos, yPos).getMonster();
+		
+		if(monster!=null && monster.getStatus().equals(CharacterStatus.ALIVE) && flgMovementType != 'R'){
+			uiManager.showMessage("You can't just walk past a monster.. Either try to run or fight!");	
+			return;
 		}
 		
 		//set tile with player to null
@@ -308,10 +316,26 @@ public class GameEngine {
 		PlayerCharacter player = game.getPlayer();
 		Tile tileWithPlayer = game.getWorld().getTile(player.getCharXpos(), player.getCharYpos());
 		
-		if(tileWithPlayer.getMonster()!=null){
+		if(tileWithPlayer.getMonster()==null){
+			uiManager.showMessage("Can't run from your own shadow");
+			return false;
+		}
+		
+		int pAgility = player.getCharStats().getAgility();
+		int mAgility = tileWithPlayer.getMonster().getCharStats().getAgility();
+		int min = -10;
+		int max = 10;
+		
+		
+		int aDiference = pAgility - mAgility;
+		
+		int randomNumber = RANDOM.nextInt(max + 1 + aDiference - min) + min;
+		
+		if (randomNumber>=0){
+			uiManager.showMessage("You escaped without a bruise!");
 			return true;
 		}
-		uiManager.showMessage("Can't run from your own shadow");
+		uiManager.showMessage("The monster runs way faster than you! You'll have to fight");
 		return false;
 	}
 	
