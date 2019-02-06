@@ -1,8 +1,10 @@
 package com.throwner.ui.core;
 
 import com.throwner.engine.world.World;
+import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.framework.ContextsMap;
 import com.throwner.ui.items.CharactersTexts;
+import com.throwner.ui.items.WorldInputsSubTexts;
 import com.throwner.ui.items.WorldInputsTexts;
 import com.throwner.ui.menus.AllMenus;
 import com.throwner.utils.output.OutputUtils;
@@ -33,8 +35,13 @@ public class UIManager {
 		worldPrinter.printWorld(worldMap);
 	}
 
-	public WorldInputsTexts showWorldInputs() {
+	public WorldInputsTexts showWorldInputs() throws InputNotInOptionsException {
 		return allMenus.getWorldInputsMenu().showWorldInputsMenu();
+		
+	}
+	
+	public WorldInputsSubTexts showWorldSubInputs() throws InputNotInOptionsException {
+		return allMenus.getWorldInputsSubMenu().showWorldInputsSubMenu();
 		
 	}
 	

@@ -4,6 +4,10 @@ import com.throwner.engine.character.stats.CharacterStats;
 
 public abstract class Charater extends GenericCharacter {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9091369973154988709L;
 	private CharacterStats charStats;
 
 	public abstract CharacterType getCharacterType();

@@ -15,10 +15,13 @@ import com.throwner.engine.character.playerfactory.PlayerCharacter;
 import com.throwner.engine.character.playerfactory.PlayerFactory;
 import com.throwner.engine.world.Tile;
 import com.throwner.engine.world.World;
+import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.framework.ContextsMap;
 import com.throwner.ui.core.UIManager;
 import com.throwner.ui.items.CharactersTexts;
+import com.throwner.ui.items.WorldInputsSubTexts;
 import com.throwner.ui.items.WorldInputsTexts;
+import com.throwner.ui.menus.WorldInputsSubMenu;
 import com.throwner.utils.input.InputUtils;
 import com.throwner.utils.output.OutputUtils;
 
@@ -204,7 +207,10 @@ public class GameEngine {
 			//PRINT WORLD
 			uiManager.printWorld(game.getWorld());
 			//WAIT FOR USER INPUT
-			WorldInputsTexts choice = uiManager.showWorldInputs();
+			WorldInputsTexts choice;
+			try {
+				choice = uiManager.showWorldInputs();
+			
 			
 			//TAKE ACTION
 			takeAction(choice, game);
@@ -220,6 +226,10 @@ public class GameEngine {
 			
 			//VICTORY OR DEFEAT?
 			
+			} catch (InputNotInOptionsException e) {
+				//resume;
+			}
+			
 		}
 		
 		
@@ -234,7 +244,7 @@ public class GameEngine {
 		}
 	}
 
-	private void takeAction(WorldInputsTexts choice, Game game) {
+	private void takeAction(WorldInputsTexts choice, Game game) throws InputNotInOptionsException {
 
 		switch(choice){
 		case UP: playerMove(-1, 0, game);
@@ -246,10 +256,21 @@ public class GameEngine {
 		case RIGHT: playerMove(0, 1, game);
 				break;
 		case OPTIONS: 
-				break;//Showoptionsmenu;
+				WorldInputsSubTexts subChoice = uiManager.showWorldSubInputs();
+				switch(subChoice){
+				case SAVE: saveGame(game);
+						   uiManager.showMessage("Saved game!");
+					break;
+				case QUIT: 	uiManager.showMessage("Shutting engines down. See ya!");
+							ThrownerLauncher.shutdown();
+					break;
+				case BACK: break;
+				}
+				break;
 		case FIGHT://New fight
 					if(fightValidation(game)){
 						//FIGHTCLUB
+						//fight manager(new screen) absolute madness
 					}
 			break;
 		case RUN://SOME AMAZING AGILITY CHECKING OBVIOUSLY MISSING LOGIC 

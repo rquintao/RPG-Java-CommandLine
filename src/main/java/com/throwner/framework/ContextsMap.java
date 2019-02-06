@@ -12,6 +12,7 @@ import com.throwner.ui.menus.CharacterSelectionMenu;
 import com.throwner.ui.menus.GenericMenu;
 import com.throwner.ui.menus.MainMenu;
 import com.throwner.ui.menus.WorldInputsMenu;
+import com.throwner.ui.menus.WorldInputsSubMenu;
 import com.throwner.utils.input.InputUtils;
 import com.throwner.utils.output.OutputUtils;
 import com.throwner.utils.output.WorldPrinter;
@@ -63,6 +64,9 @@ public class ContextsMap {
 		
 		WorldInputsMenu worldInputsMenu = new WorldInputsMenu();
 		context.put(WorldInputsMenu.class, worldInputsMenu);
+		
+		WorldInputsSubMenu worldInputsSubMenu = new WorldInputsSubMenu();
+		context.put(WorldInputsSubMenu.class, worldInputsSubMenu);
 		
 		AllMenus allMenus = new AllMenus();
 		context.put(AllMenus.class, allMenus);

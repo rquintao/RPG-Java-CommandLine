@@ -6,7 +6,7 @@ import com.throwner.ui.items.WorldInputsTexts;
 
 public class WorldInputsMenu extends GenericMenu<Object> {
 	
-	public WorldInputsTexts showWorldInputsMenu(){
+	public WorldInputsTexts showWorldInputsMenu() throws InputNotInOptionsException{
 	
 		WorldInputsTexts[] values = WorldInputsTexts.values();
 		
@@ -35,7 +35,7 @@ public class WorldInputsMenu extends GenericMenu<Object> {
 			e.printStackTrace();
 		} catch (InputNotInOptionsException e) {
 			showMessage("Please provide a valid input!");
-			showWorldInputsMenu();
+			throw new InputNotInOptionsException(null);
 		}
 		return null;
 	}

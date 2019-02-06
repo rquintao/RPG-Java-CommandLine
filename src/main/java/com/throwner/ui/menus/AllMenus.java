@@ -5,7 +5,8 @@ import com.throwner.framework.ContextsMap;
 public class AllMenus {
 	private MainMenu mainMenu = ContextsMap.getBean(MainMenu.class);
 	private CharacterSelectionMenu characterSelectionMenu = ContextsMap.getBean(CharacterSelectionMenu.class);
-	private WorldInputsMenu worldInputsMenu  = ContextsMap.getBean(WorldInputsMenu.class); 
+	private WorldInputsMenu worldInputsMenu = ContextsMap.getBean(WorldInputsMenu.class); 
+	private WorldInputsSubMenu worldInputsSubMenu = ContextsMap.getBean(WorldInputsSubMenu.class); 
 	@SuppressWarnings("unchecked")
 	private GenericMenu<Object> genericMenu = ContextsMap.getBean(GenericMenu.class); 
 	
@@ -25,5 +26,8 @@ public class AllMenus {
 		return genericMenu;
 	}
 
+	public WorldInputsSubMenu getWorldInputsSubMenu() {
+		return worldInputsSubMenu;
+	}
 	
 }
