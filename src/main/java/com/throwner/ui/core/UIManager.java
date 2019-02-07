@@ -1,5 +1,8 @@
 package com.throwner.ui.core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.throwner.engine.character.MonsterCharacter;
 import com.throwner.engine.character.playerfactory.PlayerCharacter;
 import com.throwner.engine.world.World;
@@ -15,6 +18,7 @@ import com.throwner.utils.output.WorldPrinter;
 public class UIManager {
 	AllMenus allMenus = null;
 	WorldPrinter worldPrinter = null;
+	private static final Logger LOG = LogManager.getLogger(UIManager.class);
 	
 	public UIManager(){
 		allMenus = ContextsMap.getBean(AllMenus.class);
@@ -22,6 +26,7 @@ public class UIManager {
 	}
 	
 	public void showMainMenu(){
+		LOG.debug("Getting main menu and showing it..");
 		allMenus.getMainMenu().showMainMenu();
 	}
 	

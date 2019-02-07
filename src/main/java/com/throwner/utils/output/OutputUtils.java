@@ -4,11 +4,15 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.throwner.engine.core.Game;
 
 public class OutputUtils {
 	
 	 private final PrintStream out;
+	 private static final Logger LOG = LogManager.getLogger(OutputUtils.class);
 	 
 	 public OutputUtils (PrintStream out){
 		 this.out = out;
@@ -21,6 +25,7 @@ public class OutputUtils {
 	}
 		
 	public void saveState(Game game){
+		LOG.traceEntry();
 		try
 		{
 		   FileOutputStream myFileOutputStream = new FileOutputStream(System.getProperty("user.dir") + "/game.ser");
@@ -30,8 +35,7 @@ public class OutputUtils {
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
-		   // Log.e("Error when saving to file.",Log.getStackTraceString(e)); 
+			LOG.debug(e); 
 		}
 	}
 	

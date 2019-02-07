@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.throwner.engine.core.ThrownerLauncher;
 import com.throwner.engine.core.fight.FightManager;
 import com.throwner.ui.core.UIManager;
@@ -24,17 +27,21 @@ public class ContextsMap {
 	
 	@SuppressWarnings("rawtypes")
 	private static final Map<Class, Object> context = new HashMap<Class, Object>();
+	private static final Logger LOG = LogManager.getLogger(ContextsMap.class);
 	
 	static{
+		LOG.traceEntry();
 		loadUtils(); 
 		loadUI();
 		loadCore();
+		LOG.traceExit();
 	}
 	
 	private ContextsMap(){
 	}
 	
 	private static void loadUtils(){
+		LOG.traceEntry();
 		OutputUtils stringWriter = new OutputUtils(System.out);
 		context.put(OutputUtils.class, stringWriter);
 		
@@ -46,18 +53,21 @@ public class ContextsMap {
 		
 		Random RANDOM = new Random();
 		context.put(Random.class, RANDOM);
+		LOG.traceExit();
 	}
 	
 	private static void loadCore(){
+		LOG.traceEntry();
 		FightManager fightManager = new FightManager();
 		context.put(FightManager.class, fightManager);
 		
 		ThrownerLauncher thrownerLauncher = new ThrownerLauncher();
 		context.put(ThrownerLauncher.class, thrownerLauncher);
-
+		LOG.traceExit();
 	};
 	
 	private static void loadUI(){
+		LOG.traceEntry();
 		GenericMenu<Object> menuManager = new GenericMenu<Object>();
 		context.put(GenericMenu.class, menuManager);
 		
@@ -81,11 +91,12 @@ public class ContextsMap {
 		
 		UIManager uiManager = new UIManager();
 		context.put(UIManager.class, uiManager);
-	
+		LOG.traceExit();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(Class<T> clazz){
+		LOG.traceEntry();
 		T bean = null;
 		
 		try{
@@ -98,7 +109,7 @@ public class ContextsMap {
 		if (bean == null){
 			
 		}
-		
+		LOG.traceExit();
 		return bean;
 		
 	}

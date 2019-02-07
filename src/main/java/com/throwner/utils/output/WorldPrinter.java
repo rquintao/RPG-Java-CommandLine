@@ -2,6 +2,9 @@ package com.throwner.utils.output;
 
 import java.io.PrintStream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.throwner.engine.character.MonsterCharacter;
 import com.throwner.engine.character.playerfactory.PlayerCharacter;
 import com.throwner.engine.world.World;
@@ -9,13 +12,14 @@ import com.throwner.engine.world.World;
 public class WorldPrinter {
 	
 	private final PrintStream out;
+	private static final Logger LOG = LogManager.getLogger(WorldPrinter.class);
 	 
 	 public WorldPrinter (PrintStream out){
 		 this.out = out;
 	 }
 
 	public void printWorld(World worldMap) {
-		
+		LOG.traceEntry();
 		int height = worldMap.getHeight();
 		int width = worldMap.getWidth();
 		

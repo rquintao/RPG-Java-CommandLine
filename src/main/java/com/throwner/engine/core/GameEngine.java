@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.throwner.engine.character.CharacterFactory;
 import com.throwner.engine.character.CharacterStatus;
 import com.throwner.engine.character.CharacterType;
@@ -38,6 +41,7 @@ public class GameEngine {
 	private OutputUtils sw = ContextsMap.getBean(OutputUtils.class);
 	private InputUtils in = ContextsMap.getBean(InputUtils.class);
 	private FightManager fightManager = ContextsMap.getBean(FightManager.class);
+	private static final Logger LOG = LogManager.getLogger(GameEngine.class);
 	
 	//MAKE THIS EDITABLE WITH DIFICULTY MAYBE?
 	private double monsterOcurrence = 0.15;
@@ -45,16 +49,21 @@ public class GameEngine {
 	private boolean defeat = false;
 
 	public static void startNewGame() {
+		LOG.traceEntry();
 		GameEngine gameEngine = new GameEngine();
 		gameEngine.newGame();
+		LOG.traceExit();
 	};
 	
 	public static void loadPreviousGame() throws FileNotFoundException {
+		LOG.traceEntry();
 		GameEngine gameEngine = new GameEngine();
 		gameEngine.loadGame();
+		LOG.traceExit();
 	}
 	
 	public void newGame(){
+		LOG.traceEntry();
 		//choose class OK
 		//choose name OK
 		//choose skill points NOK
@@ -75,15 +84,17 @@ public class GameEngine {
 		Game game = new Game(player, world, monsters);
 
 		runGame(game);
-		
+		LOG.traceExit();
 	}
 	
 	public void loadGame() throws FileNotFoundException{
+		LOG.traceEntry();
 		Game game = in.loadState();
 		
 		if(game == null) throw new FileNotFoundException();
 		
 		runGame(game);
+		LOG.traceExit();
 	}
 	
 	public void saveGame(Game game){
@@ -91,6 +102,7 @@ public class GameEngine {
 	}
 	
 	private List<MonsterCharacter> newMonsters() {
+		LOG.traceEntry();
 		List<MonsterCharacter> arr = new ArrayList<MonsterCharacter>();
 		charFactory = new MonsterFactory();
 		
@@ -133,12 +145,12 @@ public class GameEngine {
 			posArray[xPos][yPos] = 1;
 			
 		}
-		
+		LOG.traceExit();
 		return arr;
 	}
 	
 	private Charater newCharacter(){
-		
+		LOG.traceEntry();
 		Charater player = null;
 		CharactersTexts choice  = uiManager.showCharacterSelectionMenu();
 		
@@ -160,13 +172,16 @@ public class GameEngine {
 		//ADD POINTS TO PLAYER TO CUSTOMIZE THE CLASS (3 MAX AT START)
 		
 		player.setName(uiManager.showNameSelectionMenu());
-		
+		LOG.traceExit();
 		return player;
 	}
 	
 	private World newWorld(int width, int height){
+		LOG.traceEntry();
 		World world = new World(width, height);
+		LOG.traceExit();
 		return world;	
+		
 	}
 	
 	private void choosePlacePlayerInWorld(){
