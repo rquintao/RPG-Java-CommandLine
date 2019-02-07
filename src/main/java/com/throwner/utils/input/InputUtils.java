@@ -62,7 +62,7 @@ public class InputUtils {
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 		    //Log.e("Error when loading from file.",Log.getStackTraceString(e));
 		}
 		return null;

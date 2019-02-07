@@ -1,5 +1,6 @@
 package com.throwner.engine.core;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +49,7 @@ public class GameEngine {
 		gameEngine.newGame();
 	};
 	
-	public static void loadPreviousGame() {
+	public static void loadPreviousGame() throws FileNotFoundException {
 		GameEngine gameEngine = new GameEngine();
 		gameEngine.loadGame();
 	}
@@ -72,14 +73,16 @@ public class GameEngine {
 		
 		//create Game class
 		Game game = new Game(player, world, monsters);
-		
-		saveGame(game);
+
 		runGame(game);
 		
 	}
 	
-	public void loadGame(){
+	public void loadGame() throws FileNotFoundException{
 		Game game = in.loadState();
+		
+		if(game == null) throw new FileNotFoundException();
+		
 		runGame(game);
 	}
 	
@@ -317,8 +320,9 @@ public class GameEngine {
 		int yPos = gamePlayer.getCharYpos();
 		
 		//check if is a valid move
-		if(xPos + i < 0 || yPos + j < 0 || xPos+i > game.getWorld().getHeight() || yPos+i > game.getWorld().getWidth()){
-			//OUT OF BOUNDS
+		if(xPos + i < 0 || yPos + j < 0 || xPos+i > game.getWorld().getHeight() || yPos+j > game.getWorld().getWidth()){
+			uiManager.showMessage("You can't go out of this world smart ass!");
+			return;
 		}
 		
 		MonsterCharacter monster = game.getWorld().getTile(xPos, yPos).getMonster();

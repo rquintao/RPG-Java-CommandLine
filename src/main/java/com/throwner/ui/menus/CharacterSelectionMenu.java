@@ -43,7 +43,6 @@ public class CharacterSelectionMenu extends GenericMenu<Object> {
 			String choice = getStringResponseFromInput();
 			return choice;
 		} catch (InputGenericException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

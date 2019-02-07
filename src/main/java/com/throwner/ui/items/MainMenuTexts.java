@@ -1,10 +1,10 @@
 package com.throwner.ui.items;
 
 public enum MainMenuTexts {
-	START("Start a new game"),
-	LOAD("Load the saved game"),
-	ABOUT("About the creator"),
-	EXIT("Quit");
+	START("1 - Start a new game"),
+	LOAD("2 - Load the saved game"),
+	ABOUT("3 - About the creator"),
+	EXIT("4 - Quit");
 	
 	private final String desc;
 	

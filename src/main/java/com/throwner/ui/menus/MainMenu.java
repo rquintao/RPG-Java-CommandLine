@@ -1,5 +1,7 @@
 package com.throwner.ui.menus;
 
+import java.io.FileNotFoundException;
+
 import com.throwner.engine.core.GameEngine;
 import com.throwner.engine.core.ThrownerLauncher;
 import com.throwner.ui.items.MainMenuTexts;
@@ -9,7 +11,9 @@ public class MainMenu extends GenericMenu<Object> {
 	public void showMainMenu(){
 		MainMenuTexts[] values = MainMenuTexts.values();
 		
-		showMessage("//////////////////////////////////////////////////////// \r/////////===============THROWNER===============///////// \r////////////////////////////////////////////////////////");
+		showMessage("////////////////////////////////////////////////////////");
+		showMessage("/////////===============THROWNER===============/////////");
+		showMessage("//////////////////////////////////////////////////////// ");
 		
 		printAllOptions(convertToArrayList(values));
 		
@@ -20,7 +24,7 @@ public class MainMenu extends GenericMenu<Object> {
 				showMessage("Starting a new Game");
 				GameEngine.startNewGame();
 			} else if(choice.equals(MainMenuTexts.LOAD.toString())){
-				showMessage("Loading previous game");
+				showMessage("Trying to load previous game");
 				GameEngine.loadPreviousGame();
 			} else if(choice.equals(MainMenuTexts.ABOUT.toString())){
 				showMessage("Made by Rafael Quintão");
@@ -30,7 +34,11 @@ public class MainMenu extends GenericMenu<Object> {
 			}
 			 
 			 
-		} catch (Exception e) {
+		} catch(FileNotFoundException e){
+			//LOG THIS EXCEPTION
+			showMessage("There isn't a game to load!");
+			showMainMenu();
+		}catch (Exception e) {
 			// RESUME
 			showMessage("Please provide a valid input!");
 			showMainMenu();
