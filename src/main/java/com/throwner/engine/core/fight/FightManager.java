@@ -15,23 +15,24 @@ public class FightManager {
 	
 	private UIManager uiManager = ContextsMap.getBean(UIManager.class);
 	private Random RANDOM  = ContextsMap.getBean(Random.class);
+	private final int noPlayerAttack = -100;
 	
 	public FightStatus startFight(MonsterCharacter monster, PlayerCharacter player){
 		
 		CharacterStatus monsterStatus = monster.getStatus();
 		CharacterStatus playerStatus = player.getStatus();
+		FightStatus status = null;
 		
-		while(monsterStatus!=CharacterStatus.DEATH || playerStatus!=CharacterStatus.DEATH){
+		while(monsterStatus!=CharacterStatus.DEATH && playerStatus!=CharacterStatus.DEATH){
 		
 		try {
 			uiManager.showFightStatus(monster, player);
 			
 			FightMenuTexts choice = uiManager.showFightMenu();
 		
-			FightStatus status = takeAction(choice,monster, player);
+		    status = takeAction(choice,monster, player);
 			
 			if(status.equals(FightStatus.RAN_AWAY)) return FightStatus.RAN_AWAY;
-		
 		
 		} catch (InputNotInOptionsException e) {
 			//RESUME
@@ -39,39 +40,116 @@ public class FightManager {
 		
 		monsterStatus = monster.getStatus();
 		playerStatus = player.getStatus();
+		
 		}
 		
 		
-		return null;
+		return status;
 	}
 	
 	private FightStatus takeAction(FightMenuTexts choice, MonsterCharacter monster, PlayerCharacter player) throws InputNotInOptionsException {
 
+		int playerFirst = agilityValidation(player, monster);
+		
 		switch(choice){
-		case FIGHT://New fight
-			processAttack(monster, player);
-			break;
-		case BLOCK://block
-			break;
-		case RUN:
+		case FIGHT:
+				//New fight
+				return processAttack(player, monster, playerFirst);
+		case BLOCK:
+				//block
+				return processBlock(player, monster, playerFirst);
+		case RUN://RUN FOREST
 				if(runValidation(monster, player)){
 					return FightStatus.RAN_AWAY;
-				}else {//FIGHT CLUB ONCE AGAIN;
-					//FIGHT
-				};
-				break;
+				}else {
+					//FIGHT CLUB ONCE AGAIN;
+					return processAttack(player, monster, this.noPlayerAttack);
+				}
 		}
-		return null;
+		return FightStatus.ON_GOING;
 		
 	}
 	
-	private FightStatus processAttack(MonsterCharacter monster, PlayerCharacter player) {
-		return null;
-		// TODO Auto-generated method stub
+	private FightStatus processBlock(PlayerCharacter player, MonsterCharacter monster, int playerFirst) {
+		
+		int mAttack = RANDOM.nextInt((monster.getCharStats().getStrenght() - 1) + 1) + 1;     
+		int pHealth = player.getCharStats().getHealth();
+		int pBlock = RANDOM.nextInt((monster.getCharStats().getStrenght() - 1) + 1) + 1;
+		
+		if(playerFirst >=0 ){		
+			mAttack = Math.max(0, mAttack - pBlock);
+		} ;
+		
+		player.getCharStats().setHealth(Math.max(0, pHealth - mAttack));
+		
+		if(isPlayerAlive(player).equals(FightStatus.PLAYER_DEAD)) return FightStatus.PLAYER_DEAD;
+		return FightStatus.ON_GOING;	
 		
 	}
 
-	private boolean runValidation(MonsterCharacter monster, PlayerCharacter player){
+	private FightStatus processAttack(PlayerCharacter player,MonsterCharacter monster, int playerFirst) {
+										//((max - min) + 1) + min
+		int mAttack = RANDOM.nextInt((monster.getCharStats().getStrenght() - 1) + 1) + 1;     
+		int pAttack = RANDOM.nextInt((player.getCharStats().getStrenght() - 1) + 1) + 1; 
+		int mHealth = monster.getCharStats().getHealth();
+		int pHealth = player.getCharStats().getHealth();
+		
+		if(playerFirst==this.noPlayerAttack){
+			uiManager.showMessage("The monster is attacking you with " + mAttack + " points of damage.");
+			uiManager.showMessage("You are left with " + Math.max(0, pHealth - mAttack) + " points of health.");
+			player.getCharStats().setHealth(Math.max(0, pHealth - mAttack));
+			return isPlayerAlive(player);
+		}	
+		
+		if(playerFirst >=0 ){
+			uiManager.showMessage("You are attacking the monster with " + pAttack + " points of damage.");
+			uiManager.showMessage("The monster is left with " + Math.max(0, mHealth - pAttack) + " points of health.");
+			monster.getCharStats().setHealth(Math.max(0, mHealth - pAttack));
+			if(isMonsterAlive(monster).equals(FightStatus.MONSTER_DEAD)) return FightStatus.MONSTER_DEAD;
+			
+			
+			uiManager.showMessage("The monster is attacking you with " + mAttack + " points of damage.");
+			uiManager.showMessage("You are left with " + Math.max(0, pHealth - mAttack) + " points of health.");
+			player.getCharStats().setHealth(Math.max(0, pHealth - mAttack));
+			
+			if(isPlayerAlive(player).equals(FightStatus.PLAYER_DEAD)) return FightStatus.PLAYER_DEAD;
+			return FightStatus.ON_GOING;
+		}	
+		
+		if(playerFirst < 0 ){
+			uiManager.showMessage("The monster is attacking you with " + mAttack + " points of damage.");
+			uiManager.showMessage("You are left with " + Math.max(0, pHealth - mAttack) + " points of health.");
+			player.getCharStats().setHealth(Math.max(0, pHealth - mAttack));
+			if(isPlayerAlive(player).equals(FightStatus.PLAYER_DEAD)) return FightStatus.PLAYER_DEAD;
+			
+			uiManager.showMessage("You are attacking the monster with " + pAttack + " points of damage.");
+			uiManager.showMessage("The monster is left with " + Math.max(0, mHealth - pAttack) + " points of health.");
+			monster.getCharStats().setHealth(Math.max(0, mHealth - pAttack));
+			if(isMonsterAlive(monster).equals(FightStatus.MONSTER_DEAD)) return FightStatus.MONSTER_DEAD;
+			return FightStatus.ON_GOING;
+		}	
+		
+		return FightStatus.ON_GOING;
+		
+	}
+	
+	private FightStatus isPlayerAlive(PlayerCharacter player){
+		if(player.getCharStats().getHealth()==0) {
+			player.setStatus(CharacterStatus.DEATH);
+			return FightStatus.PLAYER_DEAD; 
+		}	
+		return FightStatus.ON_GOING;
+	}
+	
+	private FightStatus isMonsterAlive(MonsterCharacter monster){
+		if(monster.getCharStats().getHealth()==0) {
+			monster.setStatus(CharacterStatus.DEATH);
+			return FightStatus.MONSTER_DEAD; 
+		}	
+		return FightStatus.ON_GOING;
+	}
+
+	private int agilityValidation(PlayerCharacter player, MonsterCharacter monster){
 		
 		int pAgility = player.getCharStats().getAgility();
 		int mAgility = monster.getCharStats().getAgility();
@@ -83,6 +161,13 @@ public class FightManager {
 		
 		int randomNumber = RANDOM.nextInt(max + 1 + aDiference - min) + min;
 		
+	return randomNumber;
+	}
+	
+	public boolean runValidation(MonsterCharacter monster, PlayerCharacter player){
+		
+		int randomNumber = agilityValidation(player, monster);
+		
 		if (randomNumber>=0){
 			uiManager.showMessage("You chickened out and ran from the fight!");
 			return true;
@@ -90,4 +175,6 @@ public class FightManager {
 		uiManager.showMessage("The monster grabbed you and didn't let you run!");
 		return false;
 	}
+	
+	
 }

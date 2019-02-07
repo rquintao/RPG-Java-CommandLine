@@ -20,6 +20,7 @@ import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.framework.ContextsMap;
 import com.throwner.ui.core.UIManager;
 import com.throwner.ui.items.CharactersTexts;
+import com.throwner.ui.items.FightStatus;
 import com.throwner.ui.items.WorldInputsSubTexts;
 import com.throwner.ui.items.WorldInputsTexts;
 import com.throwner.utils.input.InputUtils;
@@ -204,7 +205,7 @@ public class GameEngine {
 	public void runGame(Game game){
 		
 		
-		while(!victory || !defeat){
+		while(!victory && !defeat){
 			//PRINT WORLD
 			uiManager.printWorld(game.getWorld());
 			//WAIT FOR USER INPUT
@@ -214,12 +215,11 @@ public class GameEngine {
 
 			//TAKE ACTION
 				//FIGHT?
+				//DEFEAT?
 			takeAction(choice, game);
 			
-			//UPDATE WORLD
-			updateWorld(game);
-
-			//VICTORY OR DEFEAT?
+			//UPDATE WORLD	//VICTORY
+			if(!updateWorld(game)) this.victory=true;
 			
 			} catch (InputNotInOptionsException e) {
 				//resume;
@@ -227,19 +227,37 @@ public class GameEngine {
 			
 		}
 		
+		if(defeat){
+			uiManager.showMessage("You are weak young blood.. You should rest before trying again!");
+			ThrownerLauncher.shutdown();
+		}
+		
+		if(victory){
+			uiManager.showMessage("You are the almighty king of the wastelands!! Enjoy your last days alone in this world!");
+			ThrownerLauncher.shutdown();
+		}
+		
 		
 	}
 
-	private void updateWorld(Game game) {
+	private boolean updateWorld(Game game) {
+		boolean areThereMonstersAlive = false;
+		
 		//UPDATE Tiles
 		List<Tile> tiles = game.getWorld().getTiles();
 		
 		for(Tile t: tiles){
+			MonsterCharacter monster = t.getMonster();
+			
+			if(monster != null && t.getMonster().getStatus().equals(CharacterStatus.ALIVE)) areThereMonstersAlive=true;
+			
 			t.updateTile();
 		}
+		return areThereMonstersAlive;
 	}
 
 	private void takeAction(WorldInputsTexts choice, Game game) throws InputNotInOptionsException {
+		FightStatus status = null;
 
 		switch(choice){
 		case UP: playerMove(-1, 0, game, 'W');
@@ -267,7 +285,10 @@ public class GameEngine {
 						//FIGHTCLUB
 						PlayerCharacter fightplayer = game.getPlayer();
 						MonsterCharacter fightmonster = game.getWorld().getTile(game.getPlayer().getCharXpos(), game.getPlayer().getCharYpos()).getMonster();
-						fightManager.startFight(fightmonster, fightplayer);
+						status = fightManager.startFight(fightmonster, fightplayer);
+						
+						if(status!= null && status.equals(FightStatus.PLAYER_DEAD)) this.defeat = true;
+						
 					}
 			break;
 		case RUN:
@@ -277,7 +298,9 @@ public class GameEngine {
 				}else {//FIGHT CLUB ONCE AGAIN;
 					PlayerCharacter fightplayer = game.getPlayer();
 					MonsterCharacter fightmonster = game.getWorld().getTile(game.getPlayer().getCharXpos(), game.getPlayer().getCharYpos()).getMonster();
-					fightManager.startFight(fightmonster, fightplayer);
+					status = fightManager.startFight(fightmonster, fightplayer);
+					
+					if(status.equals(FightStatus.PLAYER_DEAD)) this.defeat = true;
 				};
 				break;
 		}
@@ -346,6 +369,10 @@ public class GameEngine {
 		//If there is a monster and it is alive
 		if(tileWithPlayer.getMonster()!=null && tileWithPlayer.getMonster().getStatus().equals(CharacterStatus.ALIVE)){
 			uiManager.showMessage("Starting fight club");
+			return true;
+		}
+		if(tileWithPlayer.getMonster()!=null && tileWithPlayer.getMonster().getStatus().equals(CharacterStatus.DEATH)){
+			uiManager.showMessage("You already killed this one. No point in beating it up even more.");
 			return true;
 		}
 		uiManager.showMessage("Can't fight with your own problems");
