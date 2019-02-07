@@ -17,7 +17,7 @@
 ## TO DOS
 
 There are a lot of things to do.
-  1. Add logging throughout the project
+  1. Add more logging throughout the project (there are small parts that have it)
   2. Add more unit testing
   3. Debug the application
   4. Implement the level up logic. (everything is ready though)
