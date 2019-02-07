@@ -221,7 +221,7 @@ public class GameEngine {
 			//UPDATE WORLD	//VICTORY
 			if(!updateWorld(game)) this.victory=true;
 			
-			} catch (InputNotInOptionsException e) {
+			} catch (Exception e) {
 				//resume;
 			}
 			
@@ -288,6 +288,8 @@ public class GameEngine {
 						status = fightManager.startFight(fightmonster, fightplayer);
 						
 						if(status!= null && status.equals(FightStatus.PLAYER_DEAD)) this.defeat = true;
+						if(status!= null && status.equals(FightStatus.RAN_AWAY)) 
+								playerMove(RANDOM.nextInt(3)-1, RANDOM.nextInt(3)-1, game, 'R');
 						
 					}
 			break;

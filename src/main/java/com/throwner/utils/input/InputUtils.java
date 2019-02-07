@@ -16,11 +16,18 @@ public class InputUtils {
 	}
 	
 	public int getIntValue() throws InputGenericException{
+		try{
 		String selection = String.valueOf(scanner.next(".").charAt(0));
+		scanner.nextLine();
 		
 		if (selection.chars().allMatch( Character::isDigit )){
 			return Integer.valueOf(selection);
 		} else throw new InputGenericException("Not a numeric value");
+		}
+		catch(Exception e){
+			scanner.nextLine();
+			throw new InputGenericException("Not a numeric value");
+		}
 	}
 	
 	public String getStringValue() throws InputGenericException{
@@ -29,7 +36,10 @@ public class InputUtils {
 		
 		if (selection != null){
 			return selection;
-		} else throw new InputGenericException("Not a numeric value");
+		} else {
+			scanner.nextLine();
+			throw new InputGenericException("Not a numeric value");
+		}
 	}
 	
 	public char getCharValue() throws InputGenericException{

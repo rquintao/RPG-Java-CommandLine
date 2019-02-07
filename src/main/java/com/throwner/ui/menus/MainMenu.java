@@ -2,13 +2,15 @@ package com.throwner.ui.menus;
 
 import com.throwner.engine.core.GameEngine;
 import com.throwner.engine.core.ThrownerLauncher;
-import com.throwner.exceptions.InputGenericException;
 import com.throwner.ui.items.MainMenuTexts;
 
 public class MainMenu extends GenericMenu<Object> {
 	
 	public void showMainMenu(){
 		MainMenuTexts[] values = MainMenuTexts.values();
+		
+		showMessage("//////////////////////////////////////////////////////// \r/////////===============THROWNER===============///////// \r////////////////////////////////////////////////////////");
+		
 		printAllOptions(convertToArrayList(values));
 		
 		try {
@@ -28,11 +30,12 @@ public class MainMenu extends GenericMenu<Object> {
 			}
 			 
 			 
-		} catch (InputGenericException e) {
-			e.printStackTrace();
-		}
-		
-		
+		} catch (Exception e) {
+			// RESUME
+			showMessage("Please provide a valid input!");
+			showMainMenu();
+			//LOG
+		}	
 		
 	}
 	

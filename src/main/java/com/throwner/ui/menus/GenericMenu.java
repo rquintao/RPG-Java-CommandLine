@@ -37,14 +37,14 @@ public class GenericMenu<T> {
 	    return enumValues;
 	}
 	
-	public String getResponseFromInput(T[] arr) throws InputGenericException{
+	public String getResponseFromInput(T[] arr) throws InputNotInOptionsException, InputGenericException{
 
 	    int choice = in.getIntValue();
 	    
 	    if(choice <= arr.length && choice > 0){
 	    	return arr[choice - 1].toString();
 	    } else {
-	    	throw new InputGenericException("Error in input");
+	    	throw new InputNotInOptionsException("Input not in options");
 	    }
 	}
 	

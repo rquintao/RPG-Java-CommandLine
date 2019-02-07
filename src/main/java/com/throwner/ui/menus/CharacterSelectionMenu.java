@@ -1,6 +1,7 @@
 package com.throwner.ui.menus;
 
 import com.throwner.exceptions.InputGenericException;
+import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.ui.items.CharactersTexts;
 
 public class CharacterSelectionMenu extends GenericMenu<Object> {
@@ -25,6 +26,8 @@ public class CharacterSelectionMenu extends GenericMenu<Object> {
 				return CharactersTexts.ROGUE;
 			}
 			 
+		} catch (InputNotInOptionsException e) {
+			e.printStackTrace();
 		} catch (InputGenericException e) {
 			e.printStackTrace();
 		}
