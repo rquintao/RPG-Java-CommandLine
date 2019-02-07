@@ -5,16 +5,16 @@
 
 ## Running
 
-###IDE
+### IDE
   Run the class **com.throwner.App**
   
-###Command line
+### Command line
   **java -jar throwner-0.0.1-SNAPSHOT.jar**
   
-##Building 
+## Building 
  **mvn clean package** inside project folder
  
-##TO DOS
+## TO DOS
 
 There are a lot of things to do.
   1. Add logging throughout the project
