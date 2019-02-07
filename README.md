@@ -28,6 +28,7 @@ There are a lot of things to do.
   9. Weapons?
   10. Items?
   11. Multiple attacks?
+  12. Work on some unified message service instead of what is implemented
   13. **Handle some possible scanner issues**
   14. ...
   
