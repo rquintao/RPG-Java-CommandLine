@@ -76,10 +76,14 @@ public class FightManager {
 		int pHealth = player.getCharStats().getHealth();
 		int pBlock = RANDOM.nextInt((monster.getCharStats().getStrenght() - 1) + 1) + 1;
 		
+		uiManager.showMessage("The monster is attacking you with " + mAttack + " points of damage.");
+		
 		if(playerFirst >=0 ){		
+			uiManager.showMessage("You are blocking " + pBlock + " points of damage.");
 			mAttack = Math.max(0, mAttack - pBlock);
 		} ;
-		
+	
+		uiManager.showMessage("You are left with " + Math.max(0, pHealth - mAttack) + " points of health.");
 		player.getCharStats().setHealth(Math.max(0, pHealth - mAttack));
 		
 		if(isPlayerAlive(player).equals(FightStatus.PLAYER_DEAD)) return FightStatus.PLAYER_DEAD;
