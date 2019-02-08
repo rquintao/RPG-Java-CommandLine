@@ -6,10 +6,8 @@ import org.apache.logging.log4j.Logger;
 import com.throwner.exceptions.InputGenericException;
 import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.ui.items.CharactersTexts;
-import com.throwner.utils.input.InputUtils;
 
 public class CharacterSelectionMenu extends GenericMenu<Object> {
-	private static final Logger LOG = LogManager.getLogger(InputUtils.class);
 	
 	public CharactersTexts showCharacterSeletionMenu(){
 		
@@ -49,7 +47,7 @@ public class CharacterSelectionMenu extends GenericMenu<Object> {
 			String choice = getStringResponseFromInput();
 			return choice;
 		} catch (InputGenericException e) {
-			e.printStackTrace();
+			LOG.error("Threw a Exception in CharacterSelectionMenu::showInputNameQuery, full stack trace follows:", e);
 		}
 		
 		return null;

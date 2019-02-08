@@ -35,14 +35,14 @@ public class MainMenu extends GenericMenu<Object> {
 			 
 			 
 		} catch(FileNotFoundException e){
-			//LOG THIS EXCEPTION
 			showMessage("There isn't a game to load!");
+			LOG.error("Threw a Exception in MainMenu::showMainMenu, full stack trace follows:", e);
 			showMainMenu();
 		}catch (Exception e) {
 			// RESUME
 			showMessage("Please provide a valid input!");
+			LOG.error("Threw a Exception in MainMenu::showMainMenu, full stack trace follows:", e);
 			showMainMenu();
-			//LOG
 		}	
 		
 	}

@@ -32,9 +32,10 @@ public class WorldInputsMenu extends GenericMenu<Object> {
 				return WorldInputsTexts.RUN;				
 			}			 
 		} catch (InputGenericException e) {
-			e.printStackTrace();
+			LOG.error("Threw a Exception in WorldInputsMenu::showWorldInputsMenu, full stack trace follows:", e);
 		} catch (InputNotInOptionsException e) {
 			showMessage("Please provide a valid input!");
+			LOG.error("Threw a Exception in WorldInputsMenu::showWorldInputsMenu, full stack trace follows:", e);
 			throw new InputNotInOptionsException(null);
 		}
 		return null;

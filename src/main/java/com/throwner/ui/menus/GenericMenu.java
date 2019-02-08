@@ -3,6 +3,9 @@ package com.throwner.ui.menus;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.throwner.exceptions.InputGenericException;
 import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.framework.ContextsMap;
@@ -10,7 +13,7 @@ import com.throwner.utils.input.InputUtils;
 import com.throwner.utils.output.OutputUtils;
 
 public class GenericMenu<T> {
-	
+	protected static final Logger LOG = LogManager.getLogger(GenericMenu.class);
 	OutputUtils sw;
 	InputUtils in;
 	

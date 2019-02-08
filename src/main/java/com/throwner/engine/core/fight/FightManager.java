@@ -2,6 +2,9 @@ package com.throwner.engine.core.fight;
 
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.throwner.engine.character.CharacterStatus;
 import com.throwner.engine.character.MonsterCharacter;
 import com.throwner.engine.character.playerfactory.PlayerCharacter;
@@ -12,9 +15,11 @@ import com.throwner.framework.ContextsMap;
 import com.throwner.ui.core.UIManager;
 import com.throwner.ui.items.FightMenuTexts;
 import com.throwner.ui.items.FightStatus;
+import com.throwner.utils.input.InputUtils;
 
 public class FightManager {
 	
+	private static final Logger LOG = LogManager.getLogger(InputUtils.class);
 	private UIManager uiManager = ContextsMap.getBean(UIManager.class);
 	private Random RANDOM  = ContextsMap.getBean(Random.class);
 	private final int noPlayerAttack = -100;
@@ -37,6 +42,7 @@ public class FightManager {
 			if(status.equals(FightStatus.RAN_AWAY)) return FightStatus.RAN_AWAY;
 		
 		} catch (InputNotInOptionsException e) {
+			LOG.error("Threw a Exception in FightManager::startFight, full stack trace follows:", e);
 			//RESUME
 		}
 		

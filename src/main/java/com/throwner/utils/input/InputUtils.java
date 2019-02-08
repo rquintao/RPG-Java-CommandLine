@@ -71,7 +71,7 @@ public class InputUtils {
 		}
 		catch (Exception e)
 		{
-			LOG.debug(e);
+			LOG.error("Threw a Exception in InputUtils::loadState, full stack trace follows:", e);
 		}
 		return null;
 		

@@ -35,7 +35,7 @@ public class OutputUtils {
 		}
 		catch (Exception e)
 		{
-			LOG.debug(e); 
+			LOG.error("Threw a Exception in OutputUtils::saveState, full stack trace follows:", e);
 		}
 	}
 	

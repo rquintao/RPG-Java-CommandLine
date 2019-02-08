@@ -5,7 +5,7 @@ import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.ui.items.FightMenuTexts;
 
 public class FightMenu extends GenericMenu<Object> {
-	
+
 	public FightMenuTexts showFightMenu() throws InputNotInOptionsException{
 		
 		FightMenuTexts[] values = FightMenuTexts.values();
@@ -24,9 +24,10 @@ public class FightMenu extends GenericMenu<Object> {
 				return FightMenuTexts.RUN;
 			}
 		} catch (InputGenericException e) {
-			e.printStackTrace();
+			LOG.error("Threw a Exception in FightMenu::showFightMenu, full stack trace follows:", e);
 		} catch (InputNotInOptionsException e) {
 			showMessage("Please provide a valid input!");
+			LOG.error("Threw a Exception in FightMenu::showFightMenu, full stack trace follows:", e);
 			throw new InputNotInOptionsException(null);
 		}
 		return null;

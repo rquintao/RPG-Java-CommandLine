@@ -241,7 +241,8 @@ public class GameEngine {
 			if(!updateWorld(game)) this.victory=true;
 			
 			} catch (Exception e) {
-				//resume;
+				LOG.error("Threw a Exception in GameEngine::runGame, full stack trace follows:", e);
+				//RESUME
 			}
 			
 		}
