@@ -5,6 +5,8 @@ import java.util.Random;
 import com.throwner.engine.character.CharacterStatus;
 import com.throwner.engine.character.MonsterCharacter;
 import com.throwner.engine.character.playerfactory.PlayerCharacter;
+import com.throwner.engine.core.Game;
+import com.throwner.engine.world.Tile;
 import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.framework.ContextsMap;
 import com.throwner.ui.core.UIManager;
@@ -177,6 +179,23 @@ public class FightManager {
 			return true;
 		}
 		uiManager.showMessage("The monster grabbed you and didn't let you run!");
+		return false;
+	}
+	
+	public boolean fightValidation(Game game) {
+		PlayerCharacter player = game.getPlayer();
+		Tile tileWithPlayer = game.getWorld().getTile(player.getCharXpos(), player.getCharYpos());
+		
+		//If there is a monster and it is alive
+		if(tileWithPlayer.getMonster()!=null && tileWithPlayer.getMonster().getStatus().equals(CharacterStatus.ALIVE)){
+			uiManager.showMessage("Starting fight club");
+			return true;
+		}
+		if(tileWithPlayer.getMonster()!=null && tileWithPlayer.getMonster().getStatus().equals(CharacterStatus.DEATH)){
+			uiManager.showMessage("You already killed this one. No point in beating it up even more.");
+			return true;
+		}
+		uiManager.showMessage("Can't fight with your own problems");
 		return false;
 	}
 	

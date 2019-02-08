@@ -1,56 +1,70 @@
-TRACE 2019-02-08 14:39:54,210 com.throwner.framework.ContextsMap.<clinit>(ContextsMap.java:33): Enter 
-TRACE 2019-02-08 14:39:54,210 com.throwner.framework.ContextsMap.loadUtils(ContextsMap.java:44): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.loadUtils(ContextsMap.java:56): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.loadUI(ContextsMap.java:70): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.loadUI(ContextsMap.java:94): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.loadCore(ContextsMap.java:60): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.loadCore(ContextsMap.java:66): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.<clinit>(ContextsMap.java:37): Exit 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:99): Enter 
-TRACE 2019-02-08 14:39:54,226 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:112): Exit 
-DEBUG 2019-02-08 14:39:54,226 com.throwner.ui.core.UIManager.showMainMenu(UIManager.java:29): Getting main menu and showing it.. 
-TRACE 2019-02-08 14:39:54,226 com.throwner.utils.input.InputUtils.getIntValue(InputUtils.java:23): Enter 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.<clinit>(ContextsMap.java:33): Starting DI framework 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.loadUtils(ContextsMap.java:44): Starting loadUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.loadUI(ContextsMap.java:68): Starting loadUI 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.output.OutputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.input.InputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.output.OutputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.input.InputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.output.OutputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.input.InputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.output.OutputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.input.InputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.output.OutputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.input.InputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.output.OutputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.input.InputUtils 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.ui.menus.MainMenu 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.ui.menus.CharacterSelectionMenu 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.ui.menus.WorldInputsMenu 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.ui.menus.WorldInputsSubMenu 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.ui.menus.FightMenu 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.ui.menus.GenericMenu 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.ui.menus.AllMenus 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.output.WorldPrinter 
+DEBUG 2019-02-08 16:11:37,032 com.throwner.framework.ContextsMap.loadCore(ContextsMap.java:59): Starting loadCore 
+DEBUG 2019-02-08 16:11:37,047 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.ui.core.UIManager 
+DEBUG 2019-02-08 16:11:37,047 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class java.util.Random 
+DEBUG 2019-02-08 16:11:37,047 com.throwner.framework.ContextsMap.<clinit>(ContextsMap.java:37): Ended loading beans 
+DEBUG 2019-02-08 16:11:37,047 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.ui.core.UIManager 
+DEBUG 2019-02-08 16:11:37,047 com.throwner.ui.core.UIManager.showMainMenu(UIManager.java:29): Getting main menu and showing it.. 
+TRACE 2019-02-08 16:11:37,047 com.throwner.utils.input.InputUtils.getIntValue(InputUtils.java:23): Enter 
+TRACE 2019-02-08 16:11:38,149 com.throwner.engine.core.GameEngine.startNewGame(GameEngine.java:53): Enter 
+DEBUG 2019-02-08 16:11:38,149 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.ui.core.UIManager 
+DEBUG 2019-02-08 16:11:38,149 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class java.util.Random 
+DEBUG 2019-02-08 16:11:38,149 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.output.OutputUtils 
+DEBUG 2019-02-08 16:11:38,149 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.utils.input.InputUtils 
+DEBUG 2019-02-08 16:11:38,149 com.throwner.framework.ContextsMap.getBean(ContextsMap.java:96): Getting bean class com.throwner.engine.core.fight.FightManager 
+TRACE 2019-02-08 16:11:38,149 com.throwner.engine.core.GameEngine.newGame(GameEngine.java:67): Enter 
+TRACE 2019-02-08 16:11:38,149 com.throwner.engine.core.GameEngine.newCharacter(GameEngine.java:154): Enter 
+TRACE 2019-02-08 16:11:38,149 com.throwner.utils.input.InputUtils.getIntValue(InputUtils.java:23): Enter 
+ERROR 2019-02-08 16:11:39,482 com.throwner.utils.input.InputUtils.getIntValue(InputUtils.java:33): Threw a Exception in InputUtils::getIntValue, full stack trace follows: 
+java.util.InputMismatchException: null
+	at java.util.Scanner.throwFor(Unknown Source) ~[?:1.8.0_181]
+	at java.util.Scanner.next(Unknown Source) ~[?:1.8.0_181]
+	at java.util.Scanner.next(Unknown Source) ~[?:1.8.0_181]
+	at com.throwner.utils.input.InputUtils.getIntValue(InputUtils.java:25) [classes/:?]
+	at com.throwner.ui.menus.GenericMenu.getResponseFromInput(GenericMenu.java:42) [classes/:?]
+	at com.throwner.ui.menus.CharacterSelectionMenu.showCharacterSeletionMenu(CharacterSelectionMenu.java:22) [classes/:?]
+	at com.throwner.ui.core.UIManager.showCharacterSelectionMenu(UIManager.java:34) [classes/:?]
+	at com.throwner.engine.core.GameEngine.newCharacter(GameEngine.java:156) [classes/:?]
+	at com.throwner.engine.core.GameEngine.newGame(GameEngine.java:72) [classes/:?]
+	at com.throwner.engine.core.GameEngine.startNewGame(GameEngine.java:55) [classes/:?]
+	at com.throwner.ui.menus.MainMenu.showMainMenu(MainMenu.java:25) [classes/:?]
+	at com.throwner.ui.core.UIManager.showMainMenu(UIManager.java:30) [classes/:?]
+	at com.throwner.engine.core.ThrownerLauncher.startGame(ThrownerLauncher.java:15) [classes/:?]
+	at com.throwner.App.main(App.java:13) [classes/:?]
+ERROR 2019-02-08 16:11:39,482 com.throwner.ui.menus.CharacterSelectionMenu.showCharacterSeletionMenu(CharacterSelectionMenu.java:38): Threw a Exception in CharacterSelectionMenu::showCharacterSeletionMenu, full stack trace follows: 
+com.throwner.exceptions.InputGenericException: Not a numeric value
+	at com.throwner.utils.input.InputUtils.getIntValue(InputUtils.java:35) ~[classes/:?]
+	at com.throwner.ui.menus.GenericMenu.getResponseFromInput(GenericMenu.java:42) ~[classes/:?]
+	at com.throwner.ui.menus.CharacterSelectionMenu.showCharacterSeletionMenu(CharacterSelectionMenu.java:22) [classes/:?]
+	at com.throwner.ui.core.UIManager.showCharacterSelectionMenu(UIManager.java:34) [classes/:?]
+	at com.throwner.engine.core.GameEngine.newCharacter(GameEngine.java:156) [classes/:?]
+	at com.throwner.engine.core.GameEngine.newGame(GameEngine.java:72) [classes/:?]
+	at com.throwner.engine.core.GameEngine.startNewGame(GameEngine.java:55) [classes/:?]
+	at com.throwner.ui.menus.MainMenu.showMainMenu(MainMenu.java:25) [classes/:?]
+	at com.throwner.ui.core.UIManager.showMainMenu(UIManager.java:30) [classes/:?]
+	at com.throwner.engine.core.ThrownerLauncher.startGame(ThrownerLauncher.java:15) [classes/:?]
+	at com.throwner.App.main(App.java:13) [classes/:?]
+TRACE 2019-02-08 16:11:39,498 com.throwner.utils.input.InputUtils.getIntValue(InputUtils.java:23): Enter 
+TRACE 2019-02-08 16:11:40,669 com.throwner.engine.core.ThrownerLauncher.shutdown(ThrownerLauncher.java:19): Exit 

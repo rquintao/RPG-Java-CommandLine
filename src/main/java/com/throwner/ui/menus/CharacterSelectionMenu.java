@@ -1,12 +1,18 @@
 package com.throwner.ui.menus;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.throwner.exceptions.InputGenericException;
 import com.throwner.exceptions.InputNotInOptionsException;
 import com.throwner.ui.items.CharactersTexts;
+import com.throwner.utils.input.InputUtils;
 
 public class CharacterSelectionMenu extends GenericMenu<Object> {
+	private static final Logger LOG = LogManager.getLogger(InputUtils.class);
 	
 	public CharactersTexts showCharacterSeletionMenu(){
+		
 		CharactersTexts[] values = CharactersTexts.values();
 		
 		sw.write("Choose your character's class:");
@@ -27,9 +33,9 @@ public class CharacterSelectionMenu extends GenericMenu<Object> {
 			}
 			 
 		} catch (InputNotInOptionsException e) {
-			e.printStackTrace();
+			LOG.error("Threw a Exception in CharacterSelectionMenu::showCharacterSeletionMenu, full stack trace follows:", e);
 		} catch (InputGenericException e) {
-			e.printStackTrace();
+			LOG.error("Threw a Exception in CharacterSelectionMenu::showCharacterSeletionMenu, full stack trace follows:", e);
 		}
 		return null;
 		

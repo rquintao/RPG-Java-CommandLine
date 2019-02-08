@@ -30,7 +30,7 @@ public class InputUtils {
 		} else throw new InputGenericException("Not a numeric value");
 		}
 		catch(Exception e){
-			LOG.debug(e);
+			LOG.error("Threw a Exception in InputUtils::getIntValue, full stack trace follows:", e);
 			scanner.nextLine();
 			throw new InputGenericException("Not a numeric value");
 		}

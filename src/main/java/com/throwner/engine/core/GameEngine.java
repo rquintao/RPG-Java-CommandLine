@@ -17,6 +17,7 @@ import com.throwner.engine.character.MonsterCharacter;
 import com.throwner.engine.character.monsterfactory.MonsterFactory;
 import com.throwner.engine.character.playerfactory.PlayerCharacter;
 import com.throwner.engine.character.playerfactory.PlayerFactory;
+import com.throwner.engine.character.stats.XpLevels;
 import com.throwner.engine.core.fight.FightManager;
 import com.throwner.engine.world.Tile;
 import com.throwner.engine.world.World;
@@ -299,7 +300,7 @@ public class GameEngine {
 				}
 				break;
 		case FIGHT://New fight
-					if(fightValidation(game)){
+					if(fightManager.fightValidation(game)){
 						//FIGHTCLUB
 						PlayerCharacter fightplayer = game.getPlayer();
 						MonsterCharacter fightmonster = game.getWorld().getTile(game.getPlayer().getCharXpos(), game.getPlayer().getCharYpos()).getMonster();
@@ -308,6 +309,10 @@ public class GameEngine {
 						if(status!= null && status.equals(FightStatus.PLAYER_DEAD)) this.defeat = true;
 						if(status!= null && status.equals(FightStatus.RAN_AWAY)) 
 								playerMove(RANDOM.nextInt(3)-1, RANDOM.nextInt(3)-1, game, 'R');
+						
+						if(status!= null && status.equals(FightStatus.MONSTER_DEAD)) {
+							updateXpAndLevel();
+						}
 						
 					}
 			break;
@@ -322,12 +327,42 @@ public class GameEngine {
 					
 					if(status.equals(FightStatus.PLAYER_DEAD)) this.defeat = true;
 				};
-				break;
+				break;	
 		}
 		
 	}
 
+	private void updateXpAndLevel() {
+		//THIS SHOULD BE DYNAMIC. DIFERENT MONSTERS SHOULD GIVE DIFFERENT XP's
+		int xp = 15;
+		int currLevel;
+		int nextLevel;
+		
+		currLevel=this.player.getCharStats().getLevel();
+		
+		uiManager.showMessage("You have gained "+ xp + " experience points in this fight!" );
+	
+		this.player.getCharStats().setXp(this.player.getCharStats().getXp() + xp);
+		
+		nextLevel=XpLevels.lookup(this.player.getCharStats().getXp()).getLevel();
+		
+		if(nextLevel==currLevel) return; //NOTHING MORE TO DO
+		
+		//LEVEL UP
+		
+		uiManager.showMessage("You have level up! Your current level is " + nextLevel + "!" );
+		
+		this.player.getCharStats().setLevel(nextLevel);
+		
+		addOneSkillPointEach();
+		
+	}
 
+	private void addOneSkillPointEach() {
+		this.player.getCharStats().setAgility(this.player.getCharStats().getAgility() + 1);
+		this.player.getCharStats().setStrenght(this.player.getCharStats().getStrenght() + 1);
+		this.player.getCharStats().setHealth(this.player.getCharStats().getHealth() + 1);
+	}
 
 	private void playerMove(int i, int j, Game game, char flgMovementType) {
 		PlayerCharacter gamePlayer = game.getPlayer();
@@ -382,24 +417,6 @@ public class GameEngine {
 		uiManager.showMessage("The monster runs way faster than you! You'll have to fight");
 		return false;
 	}
-	
-	private boolean fightValidation(Game game) {
-		PlayerCharacter player = game.getPlayer();
-		Tile tileWithPlayer = game.getWorld().getTile(player.getCharXpos(), player.getCharYpos());
-		
-		//If there is a monster and it is alive
-		if(tileWithPlayer.getMonster()!=null && tileWithPlayer.getMonster().getStatus().equals(CharacterStatus.ALIVE)){
-			uiManager.showMessage("Starting fight club");
-			return true;
-		}
-		if(tileWithPlayer.getMonster()!=null && tileWithPlayer.getMonster().getStatus().equals(CharacterStatus.DEATH)){
-			uiManager.showMessage("You already killed this one. No point in beating it up even more.");
-			return true;
-		}
-		uiManager.showMessage("Can't fight with your own problems");
-		return false;
-	}
-
 
 	
 }

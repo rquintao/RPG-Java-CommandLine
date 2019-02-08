@@ -30,18 +30,18 @@ public class ContextsMap {
 	private static final Logger LOG = LogManager.getLogger(ContextsMap.class);
 	
 	static{
-		LOG.traceEntry();
+		LOG.debug("Starting DI framework");
 		loadUtils(); 
 		loadUI();
 		loadCore();
-		LOG.traceExit();
+		LOG.debug("Ended loading beans");
 	}
 	
 	private ContextsMap(){
 	}
 	
 	private static void loadUtils(){
-		LOG.traceEntry();
+		LOG.debug("Starting loadUtils");
 		OutputUtils stringWriter = new OutputUtils(System.out);
 		context.put(OutputUtils.class, stringWriter);
 		
@@ -53,21 +53,19 @@ public class ContextsMap {
 		
 		Random RANDOM = new Random();
 		context.put(Random.class, RANDOM);
-		LOG.traceExit();
 	}
 	
 	private static void loadCore(){
-		LOG.traceEntry();
+		LOG.debug("Starting loadCore");
 		FightManager fightManager = new FightManager();
 		context.put(FightManager.class, fightManager);
 		
 		ThrownerLauncher thrownerLauncher = new ThrownerLauncher();
 		context.put(ThrownerLauncher.class, thrownerLauncher);
-		LOG.traceExit();
 	};
 	
 	private static void loadUI(){
-		LOG.traceEntry();
+		LOG.debug("Starting loadUI");
 		GenericMenu<Object> menuManager = new GenericMenu<Object>();
 		context.put(GenericMenu.class, menuManager);
 		
@@ -91,12 +89,11 @@ public class ContextsMap {
 		
 		UIManager uiManager = new UIManager();
 		context.put(UIManager.class, uiManager);
-		LOG.traceExit();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(Class<T> clazz){
-		LOG.traceEntry();
+		LOG.debug("Getting bean " + clazz);
 		T bean = null;
 		
 		try{
@@ -109,7 +106,6 @@ public class ContextsMap {
 		if (bean == null){
 			
 		}
-		LOG.traceExit();
 		return bean;
 		
 	}
